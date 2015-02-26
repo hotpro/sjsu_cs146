@@ -1,8 +1,13 @@
 package sjsu_cs146;
 
 public class PA1 {
+	private static final String INPUT_FILE_NAME = "pa1input.txt";
+	private static final String OUT_FILE_NAME = "pa1output.txt";
 
     public static void main(String[] args) {
+    	readFromFile();
+    	basisAndGain();
+    	output();
 
     }
     
@@ -42,11 +47,16 @@ public class PA1 {
 		}
     }
 
-    static public void readFromFile() {
+    static String readFromFile() {
+    	return "";
 
     }
+    
+    static void basisAndGain() {
+    	
+    }
 
-    static public void output() {
+    static void output() {
 
     }
 
