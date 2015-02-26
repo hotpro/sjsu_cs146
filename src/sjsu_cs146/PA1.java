@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class PA1 {
 	private static final String INPUT_FILE_NAME = "pa1input.txt";
@@ -34,7 +35,7 @@ public class PA1 {
     	
     }
 
-    static class Int extends Trans {
+    static class In extends Trans {
 
 		@Override
 		public boolean isInt() {
@@ -51,6 +52,8 @@ public class PA1 {
 			return false;
 		}
     }
+    
+    static ArrayList<Trans> transactions = new ArrayList<Trans>();
 
     static void readFromFile() {
     	try {
@@ -60,6 +63,20 @@ public class PA1 {
 			StringBuffer stringBuffer = new StringBuffer();
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
+				String[] transes = line.split(" ");
+				Trans trans;
+				if ("in".equals(transes[0])) {
+					trans = new In();
+				} else {
+					trans = new Out();
+					
+				}
+				transactions.add(trans);
+				
+				
+					
+				
+				
 				stringBuffer.append(line);
 				stringBuffer.append("\n");
 			}
