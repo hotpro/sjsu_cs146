@@ -1,0 +1,2 @@
+in  1: 10 at $10 each
+out 2: 5  at $11 each
