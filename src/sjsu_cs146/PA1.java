@@ -6,16 +6,40 @@ public class PA1 {
 
     }
     
-    interface Trans {
+    static abstract class Trans {
+    	int q;
+    	int price;
+    	String serial;
+    	
+    	abstract boolean isInt();
+    	String getSerial() {
+    		return serial;
+    	}
+    	int getQ() {
+    		return q;
+    	}
+    	int getPrice() {
+    		return price;
+    	}
     	
     }
 
-    static class Int {
+    static class Int extends Trans {
 
+		@Override
+		public boolean isInt() {
+			
+			return true;
+		}
     }
 
-    static class Out {
+    static class Out extends Trans{
 
+		@Override
+		public boolean isInt() {
+			
+			return false;
+		}
     }
 
     static public void readFromFile() {
