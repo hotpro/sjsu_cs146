@@ -5,6 +5,9 @@ public class PA1 {
 	private static final String OUT_FILE_NAME = "pa1output.txt";
 
     public static void main(String[] args) {
+    	readFromFile();
+    	basisAndGain();
+    	output();
 
     }
     
