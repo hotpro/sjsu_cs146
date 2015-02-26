@@ -44,11 +44,16 @@ public class PA1 {
 		}
     }
 
-    static public void readFromFile() {
+    static String readFromFile() {
+    	return "";
 
     }
+    
+    static void basisAndGain() {
+    	
+    }
 
-    static public void output() {
+    static void output() {
 
     }
 
