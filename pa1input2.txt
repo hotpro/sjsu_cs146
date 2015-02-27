@@ -1,0 +1,4 @@
+in  x1: 10 at $10 each
+out x1: 4  at $11 each
+out x1: 5  at $11 each
+out x1: 1  at $11 each
