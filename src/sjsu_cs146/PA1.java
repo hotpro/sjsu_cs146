@@ -198,7 +198,7 @@ public class PA1 {
 
                         Trans transp = current.get(0);
                         current.remove(0);
-                        current.add(new In(transp.getSerial(), transp.getItem(), trans.getQ() - outQuantity,
+                        current.add(new In(transp.getSerial(), transp.getItem(), transp.getQ() - outQuantity,
                                 transp.getPrice()));
 
                     }
