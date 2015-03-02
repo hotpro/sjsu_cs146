@@ -1,5 +1,4 @@
 package sjsu_cs146;
-
 import java.io.*;
 import java.util.*;
 
@@ -11,7 +10,7 @@ public class PA1 {
         System.out.println("Worker Start");
 
         List<Transaction> transactions = readFromFile();
-//        printList(transactions);
+        // printList(transactions);
 
         Inventory inventory = new Inventory();
         try {
@@ -19,7 +18,8 @@ public class PA1 {
                 inventory.handleTransaction(transaction);
             }
             List<Transaction> current = inventory.getCurrent();
-            List<CostBasisAndGain> costBasisAndGains = inventory.getCostBasisAndGainArrayList();
+            List<CostBasisAndGain> costBasisAndGains = inventory
+                    .getCostBasisAndGainArrayList();
 
             FileWriter fileWriter = null;
             try {
@@ -27,15 +27,20 @@ public class PA1 {
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                 bufferedWriter.write("Table 1: Current Inventory");
                 bufferedWriter.newLine();
-//                bufferedWriter.write("Serial    #   Item    Quantity    Cost");
-                bufferedWriter.write("Serial # Item Quantity Cost");
-                writeToFile(bufferedWriter, current);
+                String str = String.format("%7s  %4s  %8s  %4s", "Serial#",
+                        "Item", "Quantity", "Cost");
+                bufferedWriter.write(str);
+                writeToFile2(bufferedWriter, current);
 
                 bufferedWriter.newLine();
                 bufferedWriter.newLine();
                 bufferedWriter.write("Table 2: Cost Basis and Gains");
                 bufferedWriter.newLine();
-                bufferedWriter.write("Serial # Item Quantity Cost Basis ($) Gains ($)");
+                String s = String.format("%7s  %4s  %8s  %13s  %8s", "Serial#",
+                        "Item", "Quantity", "Cost Basis($)", "Gains($)");
+                // bufferedWriter.write("Serial#  Item  Quantity  Cost Basis($)  Gains($)");
+                bufferedWriter.write(s);
+
                 writeToFile(bufferedWriter, costBasisAndGains);
 
                 bufferedWriter.flush();
@@ -52,10 +57,10 @@ public class PA1 {
                 }
             }
 
-//            System.out.println("Table 1: Current Inventory");
-//            printList(current);
-//            System.out.println("Table 2: Cost Basis and Gains");
-//            printList(costBasisAndGains);
+            // System.out.println("Table 1: Current Inventory");
+            // printList(current);
+            // System.out.println("Table 2: Cost Basis and Gains");
+            // printList(costBasisAndGains);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,13 +68,13 @@ public class PA1 {
 
         System.out.println("Worker End");
     }
-    
+
     static abstract class Transaction {
         int serial;
         String item;
         int quantity;
         int price;
-        
+
         public Transaction(int serial, String item, int quantity, int price) {
             super();
             this.serial = serial;
@@ -77,13 +82,17 @@ public class PA1 {
             this.quantity = quantity;
             this.price = price;
         }
+
         abstract boolean isIn();
+
         int getSerial() {
             return serial;
         }
+
         int getQuantity() {
             return quantity;
         }
+
         int getPrice() {
             return price;
         }
@@ -94,10 +103,7 @@ public class PA1 {
 
         @Override
         public String toString() {
-            return serial +
-                    "   " + item +
-                    "   " + quantity +
-                    "   " + price;
+            return serial + "   " + item + "   " + quantity + "   " + price;
         }
     }
 
@@ -109,7 +115,7 @@ public class PA1 {
 
         @Override
         public boolean isIn() {
-            
+
             return true;
         }
     }
@@ -122,11 +128,10 @@ public class PA1 {
 
         @Override
         public boolean isIn() {
-            
+
             return false;
         }
     }
-
 
     static class Inventory {
         List<Transaction> current = new ArrayList<Transaction>();
@@ -148,7 +153,8 @@ public class PA1 {
                 total += transaction.getQuantity();
                 counterMap.put(transaction.getItem(), total);
             } else {
-                counterMap.put(transaction.getItem(), transaction.getQuantity());
+                counterMap
+                        .put(transaction.getItem(), transaction.getQuantity());
             }
 
             current.add(transaction);
@@ -167,12 +173,12 @@ public class PA1 {
 
             int outQuantity = transaction.getQuantity();
             if (outQuantity > total) {
-//                System.out.println("error!!!");
+                // System.out.println("error!!!");
                 throw new Exception("out quantity exceeds the inventory");
             } else {
 
                 int allTransactionSize = allTransactions.size();
-                int position = 0;
+                // int position = 0;
                 int costBasis = 0;
                 int sumOfOut = 0;
                 for (int j = 0; j < allTransactionSize; j++) {
@@ -187,8 +193,10 @@ public class PA1 {
                 }
                 sumOfOut += outQuantity * transaction.getPrice();
 
-                CostBasisAndGain costBasisAndGain = new CostBasisAndGain(transaction.getSerial(),
-                        transaction.getItem(), transaction.getQuantity(), costBasis, sumOfOut - costBasis);
+                CostBasisAndGain costBasisAndGain = new CostBasisAndGain(
+                        transaction.getSerial(), transaction.getItem(),
+                        transaction.getQuantity(), costBasis, sumOfOut
+                                - costBasis);
                 costBasisAndGainArrayList.add(costBasisAndGain);
 
                 total -= outQuantity;
@@ -214,8 +222,9 @@ public class PA1 {
                             } else if (outQuantity == 0) {
                                 break;
                             } else {
-                                current.add(j, new InTransaction(t.getSerial(), t.getItem(), t.getQuantity() - outQuantity,
-                                        t.getPrice()));
+                                current.add(j, new InTransaction(t.getSerial(),
+                                        t.getItem(), t.getQuantity()
+                                                - outQuantity, t.getPrice()));
                                 itemsToRemove.add(t);
                                 break;
                             }
@@ -229,9 +238,6 @@ public class PA1 {
                 allTransactions.add(transaction);
             }
         }
-
-
-
 
         public List<Transaction> getCurrent() {
             return current;
@@ -254,7 +260,8 @@ public class PA1 {
             StringBuilder sb = new StringBuilder();
             String line = null;
             int i = 0;
-            while ((line = bufferedReader.readLine()) != null && line.length() > 0) {
+            while ((line = bufferedReader.readLine()) != null
+                    && line.length() > 0) {
                 String[] items = line.split(" +");
                 Transaction transaction;
                 int serial = i + 1;
@@ -263,20 +270,22 @@ public class PA1 {
                 int price = Integer.parseInt(items[4].substring(1));
 
                 if ("in".equals(items[0])) {
-                    transaction = new InTransaction(serial, item, quantity, price);
+                    transaction = new InTransaction(serial, item, quantity,
+                            price);
                 } else {
-                    transaction = new OutTransaction(serial, item, quantity, price);
+                    transaction = new OutTransaction(serial, item, quantity,
+                            price);
 
                 }
                 transactions.add(transaction);
                 i++;
-                
+
                 sb.append(line);
                 sb.append("\n");
             }
             fileReader.close();
-//          System.out.println("Contents of file:");
-//          System.out.println(sb.toString());
+            // System.out.println("Contents of file:");
+            // System.out.println(sb.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -293,8 +302,6 @@ public class PA1 {
         return transactions;
 
     }
-    
-
 
     static class CostBasisAndGain {
         int serial;
@@ -303,7 +310,8 @@ public class PA1 {
         int costBasis;
         int gains;
 
-        public CostBasisAndGain(int serial, String item, int quantity, int costBasis, int gains) {
+        public CostBasisAndGain(int serial, String item, int quantity,
+                int costBasis, int gains) {
             this.serial = serial;
             this.item = item;
             this.quantity = quantity;
@@ -313,25 +321,37 @@ public class PA1 {
 
         @Override
         public String toString() {
-            return serial +
-                    "   " + item +
-                    "   " + quantity +
-                    "   " + costBasis +
-                    "   " + gains;
+            String s = String.format("%-7s  %-4s  %-8s  %-13s  %-8s", serial,
+                    item, quantity, costBasis, gains);
+            /*
+             * return serial + "   " + item + "   " + quantity + "   " +
+             * costBasis + "   " + gains;
+             */
+            return s;
         }
     }
 
-    static void writeToFile(BufferedWriter bufferedWriter, List<?> list) throws IOException {
+    static void writeToFile(BufferedWriter bufferedWriter, List<?> list)
+            throws IOException {
         for (Object o : list) {
             bufferedWriter.newLine();
+            System.out.println(o.toString());
             bufferedWriter.write(o.toString());
         }
     }
 
-    static void printList(List<?> list) {
-        for (Object o: list) {
-            System.out.println(o.toString());
+    static void writeToFile2(BufferedWriter bufferedWriter,
+            List<Transaction> list) throws IOException {
+        for (Transaction o : list) {
+            bufferedWriter.newLine();
+            String s = String.format("%-7s  %-4s  %-8s  %-4s", o.serial,
+                    o.item, o.quantity, o.price);
+            bufferedWriter.write(s);
         }
     }
-}
 
+    /*
+     * static void printList(List<?> list) { for (Object o : list) {
+     * System.out.println(o.toString()); } }
+     */
+}
