@@ -1,4 +1,5 @@
 package sjsu_cs146;
+
 import java.io.*;
 import java.util.*;
 
@@ -30,7 +31,7 @@ public class PA1 {
                 String str = String.format("%7s  %4s  %8s  %4s", "Serial#",
                         "Item", "Quantity", "Cost");
                 bufferedWriter.write(str);
-                writeToFile2(bufferedWriter, current);
+                writeToFile(bufferedWriter, current);
 
                 bufferedWriter.newLine();
                 bufferedWriter.newLine();
@@ -103,7 +104,9 @@ public class PA1 {
 
         @Override
         public String toString() {
-            return serial + "   " + item + "   " + quantity + "   " + price;
+            String s = String.format("%-7s  %-4s  %-8s  %-4s", serial,
+                    item, quantity, price);
+            return s;
         }
     }
 
@@ -196,7 +199,7 @@ public class PA1 {
                 CostBasisAndGain costBasisAndGain = new CostBasisAndGain(
                         transaction.getSerial(), transaction.getItem(),
                         transaction.getQuantity(), costBasis, sumOfOut
-                                - costBasis);
+                        - costBasis);
                 costBasisAndGainArrayList.add(costBasisAndGain);
 
                 total -= outQuantity;
@@ -224,7 +227,7 @@ public class PA1 {
                             } else {
                                 current.add(j, new InTransaction(t.getSerial(),
                                         t.getItem(), t.getQuantity()
-                                                - outQuantity, t.getPrice()));
+                                        - outQuantity, t.getPrice()));
                                 itemsToRemove.add(t);
                                 break;
                             }
@@ -311,7 +314,7 @@ public class PA1 {
         int gains;
 
         public CostBasisAndGain(int serial, String item, int quantity,
-                int costBasis, int gains) {
+                                int costBasis, int gains) {
             this.serial = serial;
             this.item = item;
             this.quantity = quantity;
@@ -335,20 +338,20 @@ public class PA1 {
             throws IOException {
         for (Object o : list) {
             bufferedWriter.newLine();
-            System.out.println(o.toString());
+//            System.out.println(o.toString());
             bufferedWriter.write(o.toString());
         }
     }
 
-    static void writeToFile2(BufferedWriter bufferedWriter,
-            List<Transaction> list) throws IOException {
-        for (Transaction o : list) {
-            bufferedWriter.newLine();
-            String s = String.format("%-7s  %-4s  %-8s  %-4s", o.serial,
-                    o.item, o.quantity, o.price);
-            bufferedWriter.write(s);
-        }
-    }
+//    static void writeToFile2(BufferedWriter bufferedWriter,
+//                             List<Transaction> list) throws IOException {
+//        for (Transaction o : list) {
+//            bufferedWriter.newLine();
+//            String s = String.format("%-7s  %-4s  %-8s  %-4s", o.serial,
+//                    o.item, o.quantity, o.price);
+//            bufferedWriter.write(s);
+//        }
+//    }
 
     /*
      * static void printList(List<?> list) { for (Object o : list) {
