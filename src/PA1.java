@@ -1,10 +1,8 @@
-package sjsu_cs146;
-
 import java.io.*;
 import java.util.*;
 
 public class PA1 {
-    private static final String INPUT_FILE_NAME = "pa1input.txt";
+    private static final String INPUT_FILE_NAME = "pa1input1.txt";
     private static final String OUT_FILE_NAME = "pa1output.txt";
 
     public static void main(String[] args) {
