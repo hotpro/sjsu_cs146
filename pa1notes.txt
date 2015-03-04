@@ -1,14 +1,36 @@
+Team members:
 Yutao Hou
 Shruti Kangokar
 
-test cases:
+Test cases:
 in  x1: 10 at $10 each
 out x1: 4  at $11 each
 out x1: 3  at $21 each
 out x1: 3  at $15 each
 
 in  x1: 10 at $10 each
+out x1: 11 at $1 each
+
+in  x1: 10 at $10 each
+in  x1: 20 at $5 each
 out x1: 4  at $11 each
-in  x2: 5  at $11 each
-out x2: 1  at $11 each
-out x2: 2  at $11 each
+out x1: 3  at $21 each
+out x1: 3  at $15 each
+
+in  x1: 10 at $10 each
+out x1: 4  at $11 each
+in  x2: 10 at $10 each
+out x2: 4  at $11 each
+out x1: 3  at $21 each
+in  x1: 20 at $5  each
+out x1: 3  at $15 each
+out x2: 3  at $21 each
+in  x2: 20 at $5  each
+out x1: 15 at $20 each
+out x1: 2  at $12 each
+out x2: 3  at $15 each
+out x2: 15 at $20 each
+out x2: 2  at $12 each
+
+Improvement:
+1. During the process, cost basis and gain could be cached and reused.

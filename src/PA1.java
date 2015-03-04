@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class PA1 {
-    private static final String INPUT_FILE_NAME = "pa1input1.txt";
+    private static final String INPUT_FILE_NAME = "pa1input.txt";
     private static final String OUT_FILE_NAME = "pa1output.txt";
 
     public static void main(String[] args) {
@@ -60,9 +60,15 @@ public class PA1 {
             // printList(current);
             // System.out.println("Table 2: Cost Basis and Gains");
             // printList(costBasisAndGains);
+        } catch (NoInventoryException nie) {
+//            nie.printStackTrace();
+            System.out.println(nie.getMessage());
+        } catch (ExceedInventoryException eie) {
+            System.out.println(eie.getMessage());
 
         } catch (Exception e) {
             e.printStackTrace();
+
         }
 
         System.out.println("Worker End");
@@ -169,13 +175,13 @@ public class PA1 {
             }
 
             if (total == 0) {
-                throw new Exception("no inventory");
+                throw new NoInventoryException("no inventory");
             }
 
             int outQuantity = transaction.getQuantity();
             if (outQuantity > total) {
                 // System.out.println("error!!!");
-                throw new Exception("out quantity exceeds the inventory");
+                throw new ExceedInventoryException("out quantity exceeds the inventory");
             } else {
 
                 int allTransactionSize = allTransactions.size();
@@ -338,6 +344,17 @@ public class PA1 {
             bufferedWriter.newLine();
 //            System.out.println(o.toString());
             bufferedWriter.write(o.toString());
+        }
+    }
+
+    static class NoInventoryException extends Exception {
+        public NoInventoryException(String message) {
+            super(message);
+        }
+    }
+    static class ExceedInventoryException extends Exception {
+        public ExceedInventoryException(String message) {
+            super(message);
         }
     }
 
