@@ -19,21 +19,21 @@ public class AVLTree {
     }
 
     private void insert(Node node, int n) {
-        if (n > node.getValue()) {
-            Node right = node.getRight();
+        if (n > node.getKey()) {
+            Node right = node.getRightChild();
             if (right != null) {
                 insert(right, n);
             } else {
                 right = new Node(n);
-                node.setRight(right);
+                node.setRightChild(right);
             }
         } else {
-            Node left = node.getLeft();
+            Node left = node.getLeftChild();
             if (left != null) {
                 insert(left, n);
             } else {
                 left = new Node(n);
-                node.setLeft(left);
+                node.setLeftChild(left);
             }
         }
     }

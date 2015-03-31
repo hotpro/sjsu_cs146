@@ -1,41 +1,79 @@
 package pa2;
 
-/**
- * Created by yutao on 3/29/15.
- */
 public class Node {
-    int value;
-    Node left;
-    Node right;
+	private int key;
+	private Node leftChild;
+	private Node rightChild;
+	private Node parent;
 
-    public Node() {
-    }
+	public Node(int key) {
+		this.key = key;
+		this.leftChild = null;
+		this.parent = null;
+		this.rightChild = null;
 
-    public Node(int value) {
-        this.value = value;
-    }
+	}
 
-    public int getValue() {
-        return value;
-    }
+	public int getKey() {
+		return key;
+	}
 
-    public void setValue(int value) {
-        this.value = value;
-    }
+	public void setKey(int key) {
+		this.key = key;
+	}
 
-    public Node getLeft() {
-        return left;
-    }
+	public Node getLeftChild() {
+		return leftChild;
+	}
 
-    public void setLeft(Node left) {
-        this.left = left;
-    }
+	public void setLeftChild(Node leftChild) {
+		this.leftChild = leftChild;
+	}
 
-    public Node getRight() {
-        return right;
-    }
+	public Node getRightChild() {
+		return rightChild;
+	}
 
-    public void setRight(Node right) {
-        this.right = right;
-    }
+	public void setRightChild(Node rightChild) {
+		this.rightChild = rightChild;
+	}
+
+	public Node getParent() {
+		return parent;
+	}
+
+	public void setParent(Node parent) {
+		this.parent = parent;
+	}
+	
+
+	public boolean isLeaf() {
+		if (this.getLeftChild() == null && this.getRightChild() == null)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isRoot() {
+		if (this.getParent() == null)
+			return true;
+		else
+			return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "" + key;
+	}
+	public boolean equals(Node element) {
+				
+		if (element == null) {
+			return false;
+		} else {
+			if(key == element.getKey())
+				return true;
+			else
+				return false;
+		}
+	}
 }
