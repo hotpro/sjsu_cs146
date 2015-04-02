@@ -10,6 +10,16 @@ public class Node {
 	private Node rightChild;
 	private Node parent;
 
+	public int getHorizontalIndex() {
+		return horizontalIndex;
+	}
+
+	public void setHorizontalIndex(int horizontalIndex) {
+		this.horizontalIndex = horizontalIndex;
+	}
+
+	private int horizontalIndex;
+
 	public Node(int key) {
 		this.key = key;
 		this.leftChild = null;

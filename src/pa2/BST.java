@@ -1,11 +1,11 @@
 package pa2;
 
-public class BSTTree {
+public class BST {
 
 	Node root;
 	int height;
 
-	BSTTree() {
+	BST() {
 		root = null;
 	}
 
