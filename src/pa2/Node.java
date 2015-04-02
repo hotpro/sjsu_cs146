@@ -1,5 +1,9 @@
 package pa2;
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
+
 public class Node {
 	private int key;
 	private Node leftChild;
@@ -76,8 +80,4 @@ public class Node {
 				return false;
 		}
 	}
-
-	public void display(){
-	}
-
 }

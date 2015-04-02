@@ -4,7 +4,7 @@ package pa2;
 /**
  * Created by yutao on 3/29/15.
  */
-public class AVLTree {
+public class AVLTree extends BST {
 
     public Node generateAVLTree(int[] numbers) {
         if (numbers == null || numbers.length == 0) {
@@ -288,7 +288,60 @@ public class AVLTree {
 
     }
 
-    private void delete(int key) {
+    @Override
+    public void delete(int key) {
+        super.delete(key);
 
+
+
+    }
+
+    private void balance(Node node) {
+        Node p = node;
+
+        while (p != null) {
+            if (!isBalance(p)) {
+                Rotation rotation = findRotationDown(p);
+                rotate(rotation);
+            }
+            p = p.getParent();
+        }
+    }
+
+    private Rotation findRotationDown(Node p) {
+        Node x = null;
+        Node y = null;
+        Node z = null;
+        Rotation.Type type = null;
+        Node l = p.getLeftChild();
+        Node r = p.getRightChild();
+
+        if (getHeight(l) > getHeight(r)) {
+            y = l;
+        } else {
+            y = r;
+        }
+
+        Node ly = y.getLeftChild();
+        Node ry = y.getRightChild();
+        int hly = getHeight(ly);
+        int hry = getHeight(ry);
+        if (hly > hry) {
+            x = ly;
+            type = y == l ? Rotation.Type.R : Rotation.Type.RL;
+        } else if (hly < hry) {
+            x = ry;
+            type = y == l ? Rotation.Type.L : Rotation.Type.LR;
+        } else {
+            if (y == l) {
+                x = ly;
+                type = Rotation.Type.R;
+            } else {
+                x = ry;
+                type = Rotation.Type.L;
+            }
+        }
+
+        return new Rotation(type, x, y, z);
     }
 }
