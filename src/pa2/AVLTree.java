@@ -4,7 +4,7 @@ package pa2;
 /**
  * Created by yutao on 3/29/15.
  */
-public class AVLTree extends BST {
+public class AVLTree extends BSTTree {
 
     public Node generateAVLTree(int[] numbers) {
         if (numbers == null || numbers.length == 0) {

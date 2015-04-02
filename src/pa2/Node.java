@@ -52,32 +52,24 @@ public class Node {
 	
 
 	public boolean isLeaf() {
-		if (this.getLeftChild() == null && this.getRightChild() == null)
-			return true;
-		else
-			return false;
+		return getLeftChild() == null && getRightChild() == null;
 	}
 	
 	public boolean isRoot() {
-		if (this.getParent() == null)
-			return true;
-		else
-			return false;
+		return getParent() == null;
 	}
 	
 	@Override
 	public String toString() {
-		return "" + key;
+		return String.valueOf(key);
 	}
+
 	public boolean equals(Node element) {
 				
 		if (element == null) {
 			return false;
 		} else {
-			if(key == element.getKey())
-				return true;
-			else
-				return false;
+			return element.getKey() == getKey();
 		}
 	}
 }

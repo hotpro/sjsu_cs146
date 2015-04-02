@@ -14,12 +14,12 @@ public class TreePrint {
 		int[] array = {50, 39, 31, 55, 14, 16, 11, 27, 10, 4};
 		//int key = generator.nextInt(62) + 1;
 		int key;
-		BST myBST = new BST();
+		BSTTree myBSTTree = new BSTTree();
 
 		for (int i = 0; i < numNodes; i++) {
 			//key = generator.nextInt(62) + 1;
 			// System.out.println("Trying to insert: " +key);
-			myBST.add(array[i]);
+			myBSTTree.add(array[i]);
 
 			key = array[i];
 		}
@@ -29,11 +29,11 @@ public class TreePrint {
 		}
 		System.out.println();
 
-		System.out.println("The height of the tree is : "+myBST.getHeight());
-		myBST.printTree(numNodes);
+		System.out.println("The height of the tree is : "+ myBSTTree.getHeight());
+		myBSTTree.printTree(numNodes);
 		System.out.println();
-		myBST.delete(14);
-		myBST.printTree(numNodes);
+		myBSTTree.delete(14);
+		myBSTTree.printTree(numNodes);
 
 //		Node tempNode = myBST.find(14);
 //		System.out.println(myBST.getSuccessor(tempNode).getKey());
