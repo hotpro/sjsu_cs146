@@ -76,4 +76,8 @@ public class Node {
 				return false;
 		}
 	}
+
+	public void display(){
+	}
+
 }
