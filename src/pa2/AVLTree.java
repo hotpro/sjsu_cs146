@@ -1,6 +1,8 @@
 package pa2;
 
 
+import java.util.Arrays;
+
 /**
  * Created by yutao on 3/29/15.
  */
@@ -10,45 +12,27 @@ public class AVLTree extends BST {
         if (numbers == null || numbers.length == 0) {
             return null;
         }
-        Node root = new Node(numbers[0]);
+
+        System.out.println(Arrays.toString(numbers));
+
+        root = new Node(numbers[0]);
 
         for (int i = 1; i < numbers.length; i++) {
-            Node inserted = insert2(root, numbers[i]);
-            Rotation rotation = findRotation(inserted);
+            Node inserted = insert(root, numbers[i]);
+            Rotation rotation = findRotationAfterInsert(inserted);
             if (rotation != null) {
                 Node node = rotate(rotation);
                 if (node != null) {
                     root = node;
                 }
             }
+            root.display();
         }
 
         return root;
     }
 
-    private void insert1(Node node, int n) {
-        if (n > node.getKey()) {
-            Node right = node.getRightChild();
-            if (right != null) {
-                insert1(right, n);
-            } else {
-                right = new Node(n);
-                right.setParent(node);
-                node.setRightChild(right);
-            }
-        } else {
-            Node left = node.getLeftChild();
-            if (left != null) {
-                insert1(left, n);
-            } else {
-                left = new Node(n);
-                left.setParent(node);
-                node.setLeftChild(left);
-            }
-        }
-    }
-
-    private Node insert2(Node root, int key) {
+    private Node insert(Node root, int key) {
         Node y = null;
         Node x = root;
         Node node = new Node(key);
@@ -84,7 +68,7 @@ public class AVLTree extends BST {
         return Math.abs(r - l) <= 1 && isBalance(node.getLeftChild()) && isBalance(node.getRightChild());
     }
 
-    private Rotation findRotation(Node node) {
+    private Rotation findRotationAfterInsert(Node node) {
         Node x = node;
         Node y = null;
 
@@ -288,11 +272,12 @@ public class AVLTree extends BST {
     }
 
     @Override
-    public void delete(int key) {
-        super.delete(key);
+    public Node delete(int key) {
 
+        Node node = super.delete(key);
+        balance(node);
 
-
+        return node;
     }
 
     private void balance(Node node) {
@@ -300,43 +285,47 @@ public class AVLTree extends BST {
 
         while (p != null) {
             if (!isBalance(p)) {
-                Rotation rotation = findRotationDown(p);
-                rotate(rotation);
+                Rotation rotation = findRotationAfterDelete(p);
+                Node rootAfterRotate = rotate(rotation);
+                if (rootAfterRotate != null) {
+                    root = rootAfterRotate;
+                }
+
             }
             p = p.getParent();
         }
     }
 
-    private Rotation findRotationDown(Node p) {
+    private Rotation findRotationAfterDelete(Node p) {
         Node x = null;
         Node y = null;
-        Node z = null;
+        Node z = p;
         Rotation.Type type = null;
-        Node l = p.getLeftChild();
-        Node r = p.getRightChild();
+        Node zLeftChild = z.getLeftChild();
+        Node zRightChild = z.getRightChild();
 
-        if (getHeight(l) > getHeight(r)) {
-            y = l;
+        if (getHeight(zLeftChild) > getHeight(zRightChild)) {
+            y = zLeftChild;
         } else {
-            y = r;
+            y = zRightChild;
         }
 
-        Node ly = y.getLeftChild();
-        Node ry = y.getRightChild();
-        int hly = getHeight(ly);
-        int hry = getHeight(ry);
+        Node yLeftChild = y.getLeftChild();
+        Node yRightChild = y.getRightChild();
+        int hly = getHeight(yLeftChild);
+        int hry = getHeight(yRightChild);
         if (hly > hry) {
-            x = ly;
-            type = y == l ? Rotation.Type.R : Rotation.Type.RL;
+            x = yLeftChild;
+            type = y == zLeftChild ? Rotation.Type.R : Rotation.Type.RL;
         } else if (hly < hry) {
-            x = ry;
-            type = y == l ? Rotation.Type.L : Rotation.Type.LR;
+            x = yRightChild;
+            type = y == zLeftChild ? Rotation.Type.LR : Rotation.Type.L;
         } else {
-            if (y == l) {
-                x = ly;
+            if (y == zLeftChild) {
+                x = yLeftChild;
                 type = Rotation.Type.R;
             } else {
-                x = ry;
+                x = yRightChild;
                 type = Rotation.Type.L;
             }
         }

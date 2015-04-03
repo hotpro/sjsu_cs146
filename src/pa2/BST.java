@@ -1,9 +1,11 @@
 package pa2;
 
+import java.util.ArrayList;
+
 public class BST {
 
-	Node root;
-	int height;
+	protected Node root;
+	private int height;
 
 	BST() {
 		root = null;
@@ -11,6 +13,9 @@ public class BST {
 
 	public int getHeight() {
 		return height;
+	}
+	public Node getRoot() {
+		return root;
 	}
 
 	// This method return the node reference if the key is found. Returns null
@@ -147,12 +152,17 @@ public class BST {
 		return successor;
 	}
 
-	public void delete(int key) {
+	/**
+	 *
+	 * @param key
+	 * @return the parent of the deleted node, null if not found.
+	 */
+	public Node delete(int key) {
 		Node delNode = find(key);
 
 		if (delNode == null) {
 			System.out.println("Node not found");
-			return;
+			return null;
 		}
 		// case 1: It is a leaf node
 
@@ -160,13 +170,14 @@ public class BST {
 			if (delNode.isRoot()) {
 				root = null;
 			}
+
 			if (delNode.equals(delNode.getParent().getLeftChild())) {
 				delNode.getParent().setLeftChild(null);
 			} else {
 				delNode.getParent().setRightChild(null);
 
 			}
-			return;
+			return delNode.getParent();
 		}
 
 		// case 2: the node to be deleted has 1 child
@@ -178,7 +189,7 @@ public class BST {
 					} else {
 						root = delNode.getRightChild();
 					}
-					return;
+					return null;
 				}
 
 				Node p1 = delNode.getParent();
@@ -194,8 +205,8 @@ public class BST {
 				} else {
 					p1.setRightChild(c1);
 				}
+				return delNode.getParent();
 			}
-			return;
 		}
 
 		// case 3: when the node to be deleted has 2 children
@@ -222,7 +233,10 @@ public class BST {
 				s1.setRightChild(c2);
 			}
 
+			return delNode.getParent();
 		}
+
+		return null;
 	}
 
 	public void printTree(int numNodes) {
@@ -260,5 +274,17 @@ public class BST {
 			System.out.println();
 		}
 	}
+	
+	public void inOrderTraversal(Node n, ArrayList<Node> arrList)
+	{
+		if(n == null)
+			return;
+		inOrderTraversal(n.getLeftChild(), arrList);
+		//System.out.println(n.getKey());
+		arrList.add(n);
+		inOrderTraversal(n.getRightChild(), arrList);
+	}
+	
+
 
 }
