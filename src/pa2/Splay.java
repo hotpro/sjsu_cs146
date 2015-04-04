@@ -4,10 +4,10 @@ package pa2;
  * Created by yutao on 4/2/15.
  */
 public class Splay {
-    Node x;
-    Node y;
-    Node z;
-    Type type;
+    private Node x;
+    private Node y;
+    private Node z;
+    private Type type;
 
     enum Type {
         L_ROTATION,
