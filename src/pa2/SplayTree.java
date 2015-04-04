@@ -125,6 +125,7 @@ public class SplayTree extends BST {
             Node successor = getSuccessor(delNode);
             Node successorRightChild = successor.getRightChild();
             Node successorParent = successor.getParent();
+            
 
             if (p1.getLeftChild().equals(delNode)) {
                 p1.setLeftChild(successor);
