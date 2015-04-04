@@ -115,20 +115,29 @@ public class Node {
 //		int[] numbers = new int[] {3, 2, 1};
 //		int[] numbers = new int[] {3, 1, 2};
 //		int[] numbers = new int[] {1, 3, 2};
-		AVLTree avlTree = new AVLTree();
-		Node root = avlTree.generateAVLTree(numbers);
-		root.display();
-
-		avlTree.delete(19);
-		avlTree.getRoot().display();
-		avlTree.delete(14);
-		avlTree.getRoot().display();
-		avlTree.delete(13);
-		avlTree.getRoot().display();
+//		AVLTree avlTree = new AVLTree();
+//		Node root = avlTree.generateAVLTree(numbers);
+//		root.display();
+//
+//		avlTree.delete(19);
+//		avlTree.getRoot().display();
+//		avlTree.delete(14);
+//		avlTree.getRoot().display();
+//		avlTree.delete(13);
+//		avlTree.getRoot().display();
 
 		SplayTree splayTree = new SplayTree(numbers);
+//		test(splayTree.getRoot(), splayTree);
 		splayTree.delete(2);
 		splayTree.getRoot().display();
+	}
 
+	public static void test(Node node, BST bst) {
+		if (node == null) {
+			return;
+		}
+		System.out.println("Node " + node+ " predecessor: " + bst.getPredecessor(node));
+		test(node.getLeftChild(), bst);
+		test(node.getRightChild(), bst);
 	}
 }

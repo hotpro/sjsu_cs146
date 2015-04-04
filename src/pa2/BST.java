@@ -102,21 +102,67 @@ public class BST {
 			}
 			successor = element;
 			System.out.println("-- " + element.getKey());
-			Node lc = successor.getParent().getLeftChild();
-			if (lc == null) {
-				lc = successor.getParent();
+			Node leftChild = successor.getParent().getLeftChild();
+			if (leftChild == null) {
+				leftChild = successor.getParent();
 			}
-			while (!successor.getParent().equals(root) && !lc.equals(successor)) {
+			while (!successor.getParent().equals(root) && !leftChild.equals(successor)) {
 				System.out.println("In loop");
 				successor = successor.getParent();
-				lc = successor.getParent().getLeftChild();
-				if (lc == null) {
-					lc = successor.getParent();
+				leftChild = successor.getParent().getLeftChild();
+				if (leftChild == null) {
+					leftChild = successor.getParent();
 				}
 			}
-			successor = successor.getParent();
+			if (successor.getKey() > element.getKey()) {
+				successor = successor.getParent();
+			} else {
+				successor = null;
+			}
 		}
 		return successor;
+	}
+
+	// predecessor is the node with biggest key in the left subtree
+	public Node getPredecessor(Node element) {
+		Node predecessor = null;
+		if (element.getLeftChild() != null) {
+			predecessor = element.getLeftChild();
+			if (predecessor.getRightChild() == null) {
+				predecessor = element.getLeftChild();
+			} else {
+				while (predecessor.getRightChild() != null) {
+					predecessor = predecessor.getRightChild();
+
+				}
+			}
+		} else {
+			System.out.println("No  left sub tree");
+			if (element.isRoot()) {
+				return null;
+			}
+			predecessor = element;
+			System.out.println("-- " + element.getKey());
+			Node rightChild = predecessor.getParent().getRightChild();
+			if (rightChild == null) {
+				rightChild = predecessor.getParent();
+			}
+			while (!predecessor.getParent().equals(root) && !rightChild.equals(predecessor)) {
+				System.out.println("In loop");
+				predecessor = predecessor.getParent();
+				rightChild = predecessor.getParent().getRightChild();
+				if (rightChild == null) {
+					rightChild = predecessor.getParent();
+				}
+			}
+			if (predecessor.getParent().getKey() < predecessor.getKey()) {
+				predecessor = predecessor.getParent();
+			} else {
+				// element is the smallest, no predecessor
+				predecessor = null;
+			}
+		}
+		return predecessor;
 	}
 
 	/**

@@ -28,6 +28,7 @@ public class SplayTree extends BST {
 
     @Override
     public Node delete(int key) {
+        System.out.println("splay tree delete: " + key);
         Node splayNode = splayDelete(key);
         if (splayNode == null) {
             System.out.println("Tree is empty");
@@ -119,41 +120,80 @@ public class SplayTree extends BST {
         // case 3: when the node to be deleted has 2 children
 
         if (delNode.getRightChild() != null && delNode.getLeftChild() != null) {
-            Node p1 = delNode.getParent();
-            Node leftChild = delNode.getLeftChild();
-            Node rightChild = delNode.getRightChild();
-            Node successor = getSuccessor(delNode);
-            Node successorRightChild = successor.getRightChild();
-            Node successorParent = successor.getParent();
-            
-
-            if (p1.getLeftChild().equals(delNode)) {
-                p1.setLeftChild(successor);
-            } else {
-                p1.setRightChild(successor);
-            }
-            successor.setParent(p1);
-
-            leftChild.setParent(successor);
-            successor.setLeftChild(leftChild);
-
-            if (successor.equals(rightChild)) {
-                rightChild.setParent(p1);
-                return successor;
-            } else {
-                rightChild.setParent(successor);
-                successor.setRightChild(rightChild);
-
-                if (successorRightChild != null) {
-                    successorRightChild.setParent(successorParent);
-                }
-                successorParent.setLeftChild(successorRightChild);
-            }
-
-            return successorParent;
+            return deleteWithPredecessor(delNode);
         }
 
         return parent;
+    }
+
+    private Node deleteWithPredecessor(Node delNode) {
+        Node parent = delNode.getParent();
+        Node leftChild = delNode.getLeftChild();
+        Node rightChild = delNode.getRightChild();
+        Node predecessor = getPredecessor(delNode);
+        Node predecessorLeftChild = predecessor.getLeftChild();
+        Node predecessorParent = predecessor.getParent();
+
+        // swap
+        if (parent.getLeftChild().equals(delNode)) {
+            parent.setLeftChild(predecessor);
+        } else {
+            parent.setRightChild(predecessor);
+        }
+        predecessor.setParent(parent);
+
+        rightChild.setParent(predecessor);
+        predecessor.setRightChild(rightChild);
+
+        if (predecessor.equals(leftChild)) {
+            leftChild.setParent(parent);
+            return predecessor;
+        } else {
+            leftChild.setParent(predecessor);
+            predecessor.setLeftChild(leftChild);
+
+            if (predecessorLeftChild != null) {
+                predecessorLeftChild.setParent(predecessorParent);
+            }
+            predecessorParent.setRightChild(predecessorLeftChild);
+        }
+
+        return predecessorParent;
+    }
+
+    private Node deleteWithSuccessor(Node delNode) {
+        Node parent = delNode.getParent();
+        Node leftChild = delNode.getLeftChild();
+        Node rightChild = delNode.getRightChild();
+        Node successor = getSuccessor(delNode);
+        Node successorRightChild = successor.getRightChild();
+        Node successorParent = successor.getParent();
+
+
+        if (parent.getLeftChild().equals(delNode)) {
+            parent.setLeftChild(successor);
+        } else {
+            parent.setRightChild(successor);
+        }
+        successor.setParent(parent);
+
+        leftChild.setParent(successor);
+        successor.setLeftChild(leftChild);
+
+        if (successor.equals(rightChild)) {
+            rightChild.setParent(parent);
+            return successor;
+        } else {
+            rightChild.setParent(successor);
+            successor.setRightChild(rightChild);
+
+            if (successorRightChild != null) {
+                successorRightChild.setParent(successorParent);
+            }
+            successorParent.setLeftChild(successorRightChild);
+        }
+
+        return successorParent;
     }
 
     /**
