@@ -19,27 +19,60 @@ public class SplayTree extends BST {
             Node splayNode = insert(root, numbers[i]);
             System.out.println("insert: " + splayNode);
             root.display();
-            balanceAfterInsert(splayNode);
+            balance(splayNode);
 
             root.display();
         }
+    }
+
+
+    @Override
+    public Node delete(int key) {
+        Node splayNode = splayDelete(key);
+        if (splayNode == null) {
+            System.out.println("Tree is empty");
+            return null;
+        }
+
+        balance(splayNode);
+        return splayNode;
     }
 
     /**
      *
      * @param key
      * @return splay node after delete. The parent of the deleted node if node found, the parent of the external node
-     * if not found.
+     * if not found. null if tree is empty.
      */
     private Node splayDelete(int key) {
-        Node delNode = find(key);
-
-        if (delNode == null) {
-            System.out.println("Node not found");
+        if (root == null) {
             return null;
         }
-        // case 1: It is a leaf node
 
+        Node currentNode = root;
+        Node parent = null;
+
+        while (currentNode != null) {
+            if (currentNode.getKey() == key) {
+                break;
+            }
+
+            parent = currentNode;
+
+            if (key < currentNode.getKey()) {
+                currentNode = currentNode.getLeftChild();
+            } else {
+                currentNode = currentNode.getRightChild();
+            }
+        }
+
+        if (currentNode == null) {
+            return parent;
+        }
+
+        Node delNode = currentNode;
+
+        // case 1: It is a leaf node
         if (delNode.isLeaf()) {
             if (delNode.isRoot()) {
                 root = null;
@@ -110,14 +143,14 @@ public class SplayTree extends BST {
             return delNode.getParent();
         }
 
-        return null;
-
+        return parent;
     }
 
     /**
      *
      * @param val
      * @return the node reference if the key is found. Returns the parent of external node otherwise.
+     * null if tree is empty.
      */
     @Override
     public Node find(int val) {
@@ -146,12 +179,7 @@ public class SplayTree extends BST {
         return parent;
     }
 
-    @Override
-    public Node delete(int key) {
-        return splayDelete(key);
-    }
-
-    private void balanceAfterInsert(Node node) {
+    private void balance(Node node) {
         Splay splay = findSplay(node);
 
         while (splay != null) {
@@ -193,7 +221,7 @@ public class SplayTree extends BST {
                     }
 
                 }
-                x.setParent(z);
+                x.setParent(zp);
 
                 if (x.getRightChild() != null) {
                     x.getRightChild().setParent(y);
@@ -264,7 +292,7 @@ public class SplayTree extends BST {
                     }
 
                 }
-                x.setParent(z);
+                x.setParent(zp);
 
                 if (x.getLeftChild() != null) {
                     x.getLeftChild().setParent(y);
