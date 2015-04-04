@@ -1,5 +1,7 @@
 package pa2;
 
+import java.util.Arrays;
+
 public class Node {
 	private int key;
 	private Node leftChild;
@@ -105,18 +107,24 @@ public class Node {
 	}
 
 	public static void main(String[] args) {
+//		int[] numbers = Utils.createNumbers(1, 20, 10);
+		int[] numbers = new int[] {19, 0, 3, 18, 11, 10, 2, 9, 14, 13};
 
 //		int[] numbers = new int[] {1, 2, 3, 4, 5, 6, 7, 8};
-		int[] numbers = new int[] {1, 2, 3, 4};
+//		int[] numbers = new int[] {1, 2, 3, 4};
 //		int[] numbers = new int[] {3, 2, 1};
 //		int[] numbers = new int[] {3, 1, 2};
 //		int[] numbers = new int[] {1, 3, 2};
-//		AVLTree avlTree = new AVLTree();
-//		Node root = avlTree.generateAVLTree(numbers);
-//		root.display();
-//
-//		avlTree.delete(1);
-//		avlTree.getRoot().display();
+		AVLTree avlTree = new AVLTree();
+		Node root = avlTree.generateAVLTree(numbers);
+		root.display();
+
+		avlTree.delete(19);
+		avlTree.getRoot().display();
+		avlTree.delete(14);
+		avlTree.getRoot().display();
+		avlTree.delete(13);
+		avlTree.getRoot().display();
 
 		SplayTree splayTree = new SplayTree(numbers);
 		splayTree.delete(2);

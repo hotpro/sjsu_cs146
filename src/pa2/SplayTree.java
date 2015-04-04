@@ -1,5 +1,7 @@
 package pa2;
 
+import com.sun.org.apache.regexp.internal.REUtil;
+
 import java.util.Arrays;
 
 /**
@@ -17,11 +19,9 @@ public class SplayTree extends BST {
 
         for (int i = 1; i < numbers.length; i++) {
             Node splayNode = insert(root, numbers[i]);
-            System.out.println("insert: " + splayNode);
+            System.out.println("insert: " + numbers[i]);
             root.display();
-            balance(splayNode);
-
-            root.display();
+            splayToRoot(splayNode);
         }
     }
 
@@ -34,7 +34,7 @@ public class SplayTree extends BST {
             return null;
         }
 
-        balance(splayNode);
+        splayToRoot(splayNode);
         return splayNode;
     }
 
@@ -120,27 +120,36 @@ public class SplayTree extends BST {
 
         if (delNode.getRightChild() != null && delNode.getLeftChild() != null) {
             Node p1 = delNode.getParent();
-            Node c1 = delNode.getLeftChild();
-            Node c2 = delNode.getRightChild();
-            Node s1 = getSuccessor(delNode);
+            Node leftChild = delNode.getLeftChild();
+            Node rightChild = delNode.getRightChild();
+            Node successor = getSuccessor(delNode);
+            Node successorRightChild = successor.getRightChild();
+            Node successorParent = successor.getParent();
 
             if (p1.getLeftChild().equals(delNode)) {
-                p1.setLeftChild(s1);
+                p1.setLeftChild(successor);
             } else {
-                p1.setRightChild(s1);
+                p1.setRightChild(successor);
+            }
+            successor.setParent(p1);
+
+            leftChild.setParent(successor);
+            successor.setLeftChild(leftChild);
+
+            if (successor.equals(rightChild)) {
+                rightChild.setParent(p1);
+                return successor;
+            } else {
+                rightChild.setParent(successor);
+                successor.setRightChild(rightChild);
+
+                if (successorRightChild != null) {
+                    successorRightChild.setParent(successorParent);
+                }
+                successorParent.setLeftChild(successorRightChild);
             }
 
-            s1.setParent(p1);
-            c1.setParent(s1);
-            s1.setLeftChild(c1);
-            if (s1.equals(c2)) {
-                c2.setParent(p1);
-            } else {
-                c2.setParent(s1);
-                s1.setRightChild(c2);
-            }
-
-            return delNode.getParent();
+            return successorParent;
         }
 
         return parent;
@@ -179,14 +188,16 @@ public class SplayTree extends BST {
         return parent;
     }
 
-    private void balance(Node node) {
+    private void splayToRoot(Node node) {
         Splay splay = findSplay(node);
 
         while (splay != null) {
             splay(splay);
             splay = findSplay(node);
+            getRoot().display();
         }
         root = node;
+        getRoot().display();
     }
 
     private void splay(Splay splay) {
@@ -244,7 +255,7 @@ public class SplayTree extends BST {
             case R_ZIG_ZAG: {
                 Node zp = z.getParent();
                 if (zp != null) {
-                    if (zp.getRightChild() != null) {
+                    if (zp.getRightChild() == z) {
                         zp.setRightChild(x);
                     } else {
                         zp.setLeftChild(x);
@@ -297,7 +308,7 @@ public class SplayTree extends BST {
                 if (x.getLeftChild() != null) {
                     x.getLeftChild().setParent(y);
                 }
-                y.setRightChild(x.getRightChild());
+                y.setRightChild(x.getLeftChild());
 
                 x.setLeftChild(y);
                 y.setParent(x);
@@ -314,7 +325,7 @@ public class SplayTree extends BST {
             case L_ZIG_ZAG: {
                 Node zp = z.getParent();
                 if (zp != null) {
-                    if (zp.getRightChild() != null) {
+                    if (zp.getRightChild() == z) {
                         zp.setRightChild(x);
                     } else {
                         zp.setLeftChild(x);
