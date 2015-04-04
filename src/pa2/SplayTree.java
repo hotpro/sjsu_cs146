@@ -13,22 +13,23 @@ public class SplayTree extends BST {
             return;
         }
 
-        System.out.println(Arrays.toString(numbers));
+        Utils.print(Arrays.toString(numbers));
 
         root = new Node(numbers[0]);
 
         for (int i = 1; i < numbers.length; i++) {
             Node splayNode = insert(root, numbers[i]);
-            System.out.println("insert: " + numbers[i]);
+            Utils.print("insert: " + numbers[i]);
             root.display();
             splayToRoot(splayNode);
+            root.display();
         }
     }
 
 
     @Override
     public Node delete(int key) {
-        System.out.println("splay tree delete: " + key);
+        Utils.print("splay tree delete: " + key);
         Node splayNode = splayDelete(key);
         if (splayNode == null) {
             System.out.println("Tree is empty");
@@ -237,10 +238,8 @@ public class SplayTree extends BST {
         while (splay != null) {
             splay(splay);
             splay = findSplay(node);
-            getRoot().display();
         }
         root = node;
-        getRoot().display();
     }
 
     private void splay(Splay splay) {
@@ -249,7 +248,7 @@ public class SplayTree extends BST {
         Node z = splay.getZ();
         Splay.Type type = splay.getType();
 
-        System.out.println(splay);
+        Utils.print(splay);
         switch (splay.getType()) {
             case R_ROTATION: {
                 if (x.getRightChild() != null) {

@@ -39,11 +39,14 @@ public class Utils {
         return numbers;
     }
 
+    public static void print(Object o) {
+        print(o.toString());
+    }
     public static void print(String s) {
         print(System.out, s);
         PrintStream printStream = null;
         try {
-            printStream = new PrintStream("pa2output.txt");
+            printStream = new PrintStream(new FileOutputStream("pa2output.txt", true));
             print(printStream, s);
             printStream.flush();
         } catch (FileNotFoundException e) {

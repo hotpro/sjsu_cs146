@@ -19,7 +19,7 @@ public class AVLTree extends BST {
 
         for (int i = 1; i < numbers.length; i++) {
             Node inserted = insert(root, numbers[i]);
-            System.out.println("insert: " + numbers[i]);
+            Utils.print("insert: " + numbers[i]);
             Rotation rotation = findRotationAfterInsert(inserted);
             if (rotation != null) {
                 Node node = rotate(rotation);
@@ -103,7 +103,7 @@ public class AVLTree extends BST {
      * @return root if root changed, null otherwise.
      */
     private Node rotate(Rotation rotation) {
-        System.out.println(rotation);
+        Utils.print(rotation);
         switch (rotation.type) {
             case L:
                 return lRotate(rotation.getX(), rotation.getY(), rotation.getZ());
@@ -254,7 +254,7 @@ public class AVLTree extends BST {
 
     @Override
     public Node delete(int key) {
-        System.out.println("delete: " + key);
+        Utils.print("delete: " + key);
 
         Node node = super.delete(key);
         balance(node);
