@@ -49,70 +49,37 @@ public class BST {
 		return null;
 	}
 
-	// Inserts a node c as a child of node p. Sets the correct values for parent
-	// and left/Right child fields of both the node.
-	public void insert(Node p, Node c) {
-		// Inserting on a empty tree
-		if (p == null) {
-			p = c;
+	/**
+	 *
+	 * @param root
+	 * @param key
+	 * @return splay node
+	 */
+	protected Node insert(Node root, int key) {
+		Node y = null;
+		Node x = root;
+		Node node = new Node(key);
+
+		while (x != null) {
+			y = x;
+			if (x.getKey() < key) {
+				x = x.getRightChild();
+			} else {
+				x = x.getLeftChild();
+			}
+		}
+
+		node.setParent(y);
+
+		if (y.getKey() < key) {
+			y.setRightChild(node);
+		} else if (y.getKey() > key){
+			y.setLeftChild(node);
 		} else {
-			c.setParent(p);
-			if (p.getKey() < c.getKey()) {// Inserting the node as a right
-											// child;
-
-				p.setRightChild(c);
-			} else {
-				// Inserting the node as a left child
-				p.setLeftChild(c);
-			}
-		}
-	}
-
-	// Traverses the BST and inserts a node with key equal to the given value at
-	// the correct location.
-	public void add(int key) {
-
-		if (root == null) {// The tree is empty while trying to add a key);
-			root = new Node(key);
-			return;
+			return null;
 		}
 
-		Node childNode = new Node(key);
-		// Traverse and find the parent node.
-		Node parent = root;
-		while (!parent.isLeaf()) { // System.out.println("5. The node being checked "
-									// + parent.getKey() is not a leaf while
-									// trying to add a key
-			if (parent.getKey() == key) {
-				// Cannot insert because the key of the parent node is same as
-				// the key of the new node key);
-				return;
-			}
-
-			if (key < parent.getKey()) {
-				if (parent.getLeftChild() != null) {
-					parent = parent.getLeftChild();
-				} else {
-					insert(parent, childNode);
-					return;
-				}
-			} else {
-				if (parent.getRightChild() != null) {
-					parent = parent.getRightChild();
-				} else {
-					insert(parent, childNode);
-					return;
-				}
-			}
-		}
-
-		if (parent.getKey() == key) {
-			// Cannot insert at this leaf node because the key of the leaf node
-			// is same as the key of the new node");
-		}
-		// Inserting the node at leaf
-		insert(parent, childNode);
-		height++;
+		return node;
 	}
 
 	// successor is the node with smallest key in the right subtree

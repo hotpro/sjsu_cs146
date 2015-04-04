@@ -1,10 +1,8 @@
 package pa2;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Random;
 import java.util.Iterator;
+import java.util.Random;
 
 public class TreePrint {
 
@@ -47,7 +45,7 @@ public class TreePrint {
 		}
 
 		for (int i = 0; i < numNodes; i++) {
-			myBST.add(array[i]);
+			myBST.insert(myBST.getRoot(), array[i]);
 
 			// This line only for testing.
 			// key = array[i];

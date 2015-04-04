@@ -32,31 +32,6 @@ public class AVLTree extends BST {
         return root;
     }
 
-    private Node insert(Node root, int key) {
-        Node y = null;
-        Node x = root;
-        Node node = new Node(key);
-
-        while (x != null) {
-            y = x;
-            if (x.getKey() < key) {
-                x = x.getRightChild();
-            } else {
-                x = x.getLeftChild();
-            }
-        }
-
-        node.setParent(y);
-
-        if (y.getKey() < key) {
-            y.setRightChild(node);
-        } else {
-            y.setLeftChild(node);
-        }
-
-        return node;
-    }
-
     private boolean isBalance(Node node) {
         if (node == null) {
             return true;
@@ -121,6 +96,11 @@ public class AVLTree extends BST {
         return r > l ? r + 1 : l + 1;
     }
 
+    /**
+     *
+     * @param rotation
+     * @return root if root changed, null otherwise.
+     */
     private Node rotate(Rotation rotation) {
         System.out.println(rotation);
         switch (rotation.type) {
