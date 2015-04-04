@@ -129,12 +129,20 @@ public class Node {
 		root.display();
 
 		for (int key : avlDeletes) {
+			if (key > upper || key < lower) {
+				Utils.print("key: " + key + " out of range, continue");
+				continue;
+			}
 			avlTree.delete(key);
 			avlTree.getRoot().display();
 		}
 
 		SplayTree splayTree = new SplayTree(numbers);
 		for (int key : splayDeletes) {
+			if (key > upper || key < lower) {
+				Utils.print("key: " + key + " out of range, continue");
+				continue;
+			}
 			splayTree.delete(key);
 			splayTree.getRoot().display();
 		}

@@ -52,3 +52,162 @@ splay tree delete: 12
 Splay{x=15, y=9, z=6, type=L_ZIG_ZIG}
 splay tree delete: 13
 Splay{x=14, y=9, z=15, type=L_ZIG_ZAG}
+input numbers: [14, 5, 3, 12, 9, 18, 6, 10, 15, 11]
+insert: 5
+insert: 3
+R rotation: nodes 3, 5, 14
+insert: 12
+insert: 9
+R rotation: nodes 9, 12, 14
+insert: 18
+L rotation: nodes 14, 12, 5
+insert: 6
+insert: 10
+insert: 15
+RL rotation: nodes 15, 18, 14
+insert: 11
+L rotation: nodes 10, 9, 5
+delete: 4
+delete: 5
+delete: 6
+delete: 7
+[14, 5, 3, 12, 9, 18, 6, 10, 15, 11]
+insert: 5
+Splay{x=5, y=14, z=null, type=R_ROTATION}
+insert: 3
+Splay{x=3, y=5, z=null, type=R_ROTATION}
+insert: 12
+Splay{x=12, y=14, z=5, type=R_ZIG_ZAG}
+Splay{x=12, y=3, z=null, type=L_ROTATION}
+insert: 9
+Splay{x=9, y=5, z=3, type=L_ZIG_ZIG}
+Splay{x=9, y=12, z=null, type=R_ROTATION}
+insert: 18
+Splay{x=18, y=14, z=12, type=L_ZIG_ZIG}
+Splay{x=18, y=9, z=null, type=L_ROTATION}
+insert: 6
+Splay{x=6, y=5, z=9, type=L_ZIG_ZAG}
+Splay{x=6, y=18, z=null, type=R_ROTATION}
+insert: 10
+Splay{x=10, y=12, z=14, type=R_ZIG_ZIG}
+Splay{x=10, y=9, z=18, type=L_ZIG_ZAG}
+Splay{x=10, y=6, z=null, type=L_ROTATION}
+insert: 15
+Splay{x=15, y=14, z=12, type=L_ZIG_ZIG}
+Splay{x=15, y=18, z=10, type=R_ZIG_ZAG}
+insert: 11
+Splay{x=11, y=12, z=14, type=R_ZIG_ZIG}
+Splay{x=11, y=10, z=15, type=L_ZIG_ZAG}
+splay tree delete: 10
+splay tree delete: 11
+Splay{x=6, y=9, z=null, type=R_ROTATION}
+splay tree delete: 12
+Splay{x=15, y=9, z=6, type=L_ZIG_ZIG}
+splay tree delete: 13
+Splay{x=14, y=9, z=15, type=L_ZIG_ZAG}
+input numbers: [14, 5, 3, 12, 9, 18, 6, 10, 15, 11]
+insert: 5
+insert: 3
+R rotation: nodes 3, 5, 14
+insert: 12
+insert: 9
+R rotation: nodes 9, 12, 14
+insert: 18
+L rotation: nodes 14, 12, 5
+insert: 6
+insert: 10
+insert: 15
+RL rotation: nodes 15, 18, 14
+insert: 11
+L rotation: nodes 10, 9, 5
+delete: 4
+delete: 5
+delete: 6
+delete: 21
+[14, 5, 3, 12, 9, 18, 6, 10, 15, 11]
+insert: 5
+Splay{x=5, y=14, z=null, type=R_ROTATION}
+insert: 3
+Splay{x=3, y=5, z=null, type=R_ROTATION}
+insert: 12
+Splay{x=12, y=14, z=5, type=R_ZIG_ZAG}
+Splay{x=12, y=3, z=null, type=L_ROTATION}
+insert: 9
+Splay{x=9, y=5, z=3, type=L_ZIG_ZIG}
+Splay{x=9, y=12, z=null, type=R_ROTATION}
+insert: 18
+Splay{x=18, y=14, z=12, type=L_ZIG_ZIG}
+Splay{x=18, y=9, z=null, type=L_ROTATION}
+insert: 6
+Splay{x=6, y=5, z=9, type=L_ZIG_ZAG}
+Splay{x=6, y=18, z=null, type=R_ROTATION}
+insert: 10
+Splay{x=10, y=12, z=14, type=R_ZIG_ZIG}
+Splay{x=10, y=9, z=18, type=L_ZIG_ZAG}
+Splay{x=10, y=6, z=null, type=L_ROTATION}
+insert: 15
+Splay{x=15, y=14, z=12, type=L_ZIG_ZIG}
+Splay{x=15, y=18, z=10, type=R_ZIG_ZAG}
+insert: 11
+Splay{x=11, y=12, z=14, type=R_ZIG_ZIG}
+Splay{x=11, y=10, z=15, type=L_ZIG_ZAG}
+splay tree delete: 10
+splay tree delete: 11
+Splay{x=6, y=9, z=null, type=R_ROTATION}
+splay tree delete: 12
+Splay{x=15, y=9, z=6, type=L_ZIG_ZIG}
+splay tree delete: 13
+Splay{x=14, y=9, z=15, type=L_ZIG_ZAG}
+input numbers: [14, 5, 3, 12, 9, 18, 6, 10, 15, 11]
+insert: 5
+insert: 3
+R rotation: nodes 3, 5, 14
+insert: 12
+insert: 9
+R rotation: nodes 9, 12, 14
+insert: 18
+L rotation: nodes 14, 12, 5
+insert: 6
+insert: 10
+insert: 15
+RL rotation: nodes 15, 18, 14
+insert: 11
+L rotation: nodes 10, 9, 5
+delete: 4
+delete: 5
+delete: 6
+key: 21 out of range, continue
+[14, 5, 3, 12, 9, 18, 6, 10, 15, 11]
+insert: 5
+Splay{x=5, y=14, z=null, type=R_ROTATION}
+insert: 3
+Splay{x=3, y=5, z=null, type=R_ROTATION}
+insert: 12
+Splay{x=12, y=14, z=5, type=R_ZIG_ZAG}
+Splay{x=12, y=3, z=null, type=L_ROTATION}
+insert: 9
+Splay{x=9, y=5, z=3, type=L_ZIG_ZIG}
+Splay{x=9, y=12, z=null, type=R_ROTATION}
+insert: 18
+Splay{x=18, y=14, z=12, type=L_ZIG_ZIG}
+Splay{x=18, y=9, z=null, type=L_ROTATION}
+insert: 6
+Splay{x=6, y=5, z=9, type=L_ZIG_ZAG}
+Splay{x=6, y=18, z=null, type=R_ROTATION}
+insert: 10
+Splay{x=10, y=12, z=14, type=R_ZIG_ZIG}
+Splay{x=10, y=9, z=18, type=L_ZIG_ZAG}
+Splay{x=10, y=6, z=null, type=L_ROTATION}
+insert: 15
+Splay{x=15, y=14, z=12, type=L_ZIG_ZIG}
+Splay{x=15, y=18, z=10, type=R_ZIG_ZAG}
+insert: 11
+Splay{x=11, y=12, z=14, type=R_ZIG_ZIG}
+Splay{x=11, y=10, z=15, type=L_ZIG_ZAG}
+splay tree delete: 10
+splay tree delete: 11
+Splay{x=6, y=9, z=null, type=R_ROTATION}
+splay tree delete: 12
+Splay{x=15, y=9, z=6, type=L_ZIG_ZIG}
+splay tree delete: 13
+Splay{x=14, y=9, z=15, type=L_ZIG_ZAG}
