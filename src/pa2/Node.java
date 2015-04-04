@@ -109,8 +109,8 @@ public class Node {
 //		int[] numbers = new int[] {1, 2, 3, 4, 5, 6, 7, 8};
 //		int[] numbers = new int[] {1, 2, 3, 4};
 //		int[] numbers = new int[] {3, 2, 1};
-		int[] numbers = new int[] {3, 1, 2};
-//		int[] numbers = new int[] {1, 3, 2};
+//		int[] numbers = new int[] {3, 1, 2};
+		int[] numbers = new int[] {1, 3, 2};
 //		AVLTree avlTree = new AVLTree();
 //		Node root = avlTree.generateAVLTree(numbers);
 //		root.display();
