@@ -107,37 +107,35 @@ public class Node {
 	}
 
 	public static void main(String[] args) {
-//		int[] numbers = Utils.createNumbers(1, 20, 10);
-		int[] numbers = new int[] {19, 0, 3, 18, 11, 10, 2, 9, 14, 13};
+		int[] input = new int[11];
+		Utils.readInputFromFile("pa2input.txt", input);
+		int lower = input[0];
+		int upper = input[1];
+		int n = input[2];
+		int[] avlDeletes = new int[4];
+		for (int i = 0; i < avlDeletes.length; i++) {
+			avlDeletes[i] = input[3 + i];
+		}
 
-//		int[] numbers = new int[] {1, 2, 3, 4, 5, 6, 7, 8};
-//		int[] numbers = new int[] {1, 2, 3, 4};
-//		int[] numbers = new int[] {3, 2, 1};
-//		int[] numbers = new int[] {3, 1, 2};
-//		int[] numbers = new int[] {1, 3, 2};
-//		AVLTree avlTree = new AVLTree();
-//		Node root = avlTree.generateAVLTree(numbers);
-//		root.display();
-//
-//		avlTree.delete(19);
-//		avlTree.getRoot().display();
-//		avlTree.delete(14);
-//		avlTree.getRoot().display();
-//		avlTree.delete(13);
-//		avlTree.getRoot().display();
+		int[] splayDeletes = new int[4];
+		for (int i = 0; i < splayDeletes.length; i++) {
+			splayDeletes[i] = input[7 + i];
+		}
+
+		int[] numbers = Utils.createNumbers(lower, upper, n);
+		AVLTree avlTree = new AVLTree();
+		Node root = avlTree.generateAVLTree(numbers);
+		root.display();
+
+		for (int key : avlDeletes) {
+			avlTree.delete(key);
+			avlTree.getRoot().display();
+		}
 
 		SplayTree splayTree = new SplayTree(numbers);
-//		test(splayTree.getRoot(), splayTree);
-		splayTree.delete(2);
-		splayTree.getRoot().display();
-	}
-
-	public static void test(Node node, BST bst) {
-		if (node == null) {
-			return;
+		for (int key : splayDeletes) {
+			splayTree.delete(key);
+			splayTree.getRoot().display();
 		}
-		System.out.println("Node " + node+ " predecessor: " + bst.getPredecessor(node));
-		test(node.getLeftChild(), bst);
-		test(node.getRightChild(), bst);
 	}
 }

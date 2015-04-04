@@ -13,7 +13,7 @@ public class AVLTree extends BST {
             return null;
         }
 
-        System.out.println(Arrays.toString(numbers));
+        Utils.print("input numbers: " + Arrays.toString(numbers));
 
         root = new Node(numbers[0]);
 

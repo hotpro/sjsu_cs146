@@ -135,10 +135,12 @@ public class SplayTree extends BST {
         Node predecessorParent = predecessor.getParent();
 
         // swap
-        if (parent.getLeftChild().equals(delNode)) {
-            parent.setLeftChild(predecessor);
-        } else {
-            parent.setRightChild(predecessor);
+        if (parent != null) {
+            if (parent.getLeftChild().equals(delNode)) {
+                parent.setLeftChild(predecessor);
+            } else {
+                parent.setRightChild(predecessor);
+            }
         }
         predecessor.setParent(parent);
 
