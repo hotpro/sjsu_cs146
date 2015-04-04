@@ -73,8 +73,10 @@ public class BST {
 
 		if (y.getKey() < key) {
 			y.setRightChild(node);
+			height++;
 		} else if (y.getKey() > key){
 			y.setLeftChild(node);
+			height++;
 		} else {
 			return null;
 		}

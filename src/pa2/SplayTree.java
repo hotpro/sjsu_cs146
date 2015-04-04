@@ -1,7 +1,5 @@
 package pa2;
 
-import com.sun.org.apache.regexp.internal.REUtil;
-
 import java.util.Arrays;
 
 /**

@@ -12,66 +12,13 @@ public class TreePrint {
 		}
 	}
 
-	public static void main(String[] args) {
-
-		Random generator = new Random();
-		int numNodes = generator.nextInt(2) + 10;
-		System.out.println("Number of nodes: " + numNodes);
-		int[] array = new int[numNodes];
-		int key;
-		BST myBST = new BST();
-
-		// One for loop to store numbers in array
-
-		// Generate the random numbers nd store in the array
-		for (int i = 0; i < numNodes; i++) {
-
-			// assume the value already exists in the array
-			boolean isExists = true;
-			while (isExists) {
-				key = generator.nextInt(62) + 1;
-				// Search if the value exists in the array.
-				isExists = false;
-				for (int j = 0; j < numNodes; j++) {
-					if (key == array[j]) {
-						isExists = true;
-						break;
-					}
-				}
-				if (isExists == false) {
-					array[i] = key;
-				}
-			}
-		}
-
-		for (int i = 0; i < numNodes; i++) {
-			myBST.insert(myBST.getRoot(), array[i]);
-
-			// This line only for testing.
-			// key = array[i];
-		}
-
+	public static void printBST(BST myBST, int numNodes, int[] array) {
 		for (int i = 0; i < numNodes; i++) {
 			System.out.print(array[i] + " ");
 		}
 		System.out.println();
 
 		System.out.println("The height of the tree is : " + myBST.getHeight());
-		// myBST.printTree(numNodes);
-		// System.out.println();
-		// myBST.delete(array[5]);
-		// myBST.printTree(numNodes);
-
-		// Node tempNode = myBST.find(14);
-		// System.out.println(myBST.getSuccessor(tempNode).getKey());
-		// System.out.println();
-		// tempNode = myBST.find(11);
-		// System.out.println(myBST.getSuccessor(tempNode).getKey());
-		// System.out.println();
-		// tempNode = myBST.find(27);
-		// System.out.println(myBST.getSuccessor(tempNode).getKey());
-		// tempNode = myBST.find(50);
-		// System.out.println(myBST.getSuccessor(tempNode).getKey());
 		Node root = myBST.getRoot();
 
 		// Inorder Traversal
@@ -134,5 +81,49 @@ public class TreePrint {
 		System.out.println("----------------------------");
 
 		root.display();
+
+	}
+
+	public static void main(String[] args) {
+		int[] input = new int[11];
+		Utils.readInputFromFile("pa2input.txt", input);
+		int lower = input[0];
+		int upper = input[1];
+		int n = input[2];
+		int[] avlDeletes = new int[4];
+		for (int i = 0; i < avlDeletes.length; i++) {
+			avlDeletes[i] = input[3 + i];
+		}
+
+		int[] splayDeletes = new int[4];
+		for (int i = 0; i < splayDeletes.length; i++) {
+			splayDeletes[i] = input[7 + i];
+		}
+
+		int[] numbers = Utils.createNumbers(lower, upper, n);
+		numbers = new int[] {14, 5, 3, 12, 9, 18, 6, 10, 15, 11};
+		AVLTree avlTree = new AVLTree();
+		Node root = avlTree.generateAVLTree(numbers);
+		root.display();
+		printBST(avlTree, n, numbers);
+
+		for (int key : avlDeletes) {
+			if (key > upper || key < lower) {
+				Utils.print("key: " + key + " out of range, continue");
+				continue;
+			}
+			avlTree.delete(key);
+			avlTree.getRoot().display();
+		}
+
+		SplayTree splayTree = new SplayTree(numbers);
+		for (int key : splayDeletes) {
+			if (key > upper || key < lower) {
+				Utils.print("key: " + key + " out of range, continue");
+				continue;
+			}
+			splayTree.delete(key);
+			splayTree.getRoot().display();
+		}
 	}
 }

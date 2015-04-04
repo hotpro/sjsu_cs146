@@ -105,46 +105,4 @@ public class Node {
 		if(level <= 0) indentLeft = "";
 		if(goOn) printTree(root.getLeftChild(), level+1, false, indentLeft);
 	}
-
-	public static void main(String[] args) {
-		int[] input = new int[11];
-		Utils.readInputFromFile("pa2input.txt", input);
-		int lower = input[0];
-		int upper = input[1];
-		int n = input[2];
-		int[] avlDeletes = new int[4];
-		for (int i = 0; i < avlDeletes.length; i++) {
-			avlDeletes[i] = input[3 + i];
-		}
-
-		int[] splayDeletes = new int[4];
-		for (int i = 0; i < splayDeletes.length; i++) {
-			splayDeletes[i] = input[7 + i];
-		}
-
-		int[] numbers = Utils.createNumbers(lower, upper, n);
-		numbers = new int[] {14, 5, 3, 12, 9, 18, 6, 10, 15, 11};
-		AVLTree avlTree = new AVLTree();
-		Node root = avlTree.generateAVLTree(numbers);
-		root.display();
-
-		for (int key : avlDeletes) {
-			if (key > upper || key < lower) {
-				Utils.print("key: " + key + " out of range, continue");
-				continue;
-			}
-			avlTree.delete(key);
-			avlTree.getRoot().display();
-		}
-
-		SplayTree splayTree = new SplayTree(numbers);
-		for (int key : splayDeletes) {
-			if (key > upper || key < lower) {
-				Utils.print("key: " + key + " out of range, continue");
-				continue;
-			}
-			splayTree.delete(key);
-			splayTree.getRoot().display();
-		}
-	}
 }
