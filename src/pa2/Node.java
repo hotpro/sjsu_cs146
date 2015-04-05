@@ -8,6 +8,16 @@ public class Node {
 	private Node rightChild;
 	private Node parent;
 
+	public int getHorizontalIndex() {
+		return horizontalIndex;
+	}
+
+	public void setHorizontalIndex(int horizontalIndex) {
+		this.horizontalIndex = horizontalIndex;
+	}
+
+	int horizontalIndex;
+
 	public Node(int key) {
 		this.key = key;
 		this.leftChild = null;
@@ -69,7 +79,7 @@ public class Node {
 	
 	@Override
 	public String toString() {
-		return "" + key;
+		return String.valueOf(key);
 	}
 	public boolean equals(Node element) {
 				

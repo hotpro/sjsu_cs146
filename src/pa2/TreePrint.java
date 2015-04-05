@@ -2,6 +2,7 @@ package pa2;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 public class TreePrint {
@@ -81,6 +82,95 @@ public class TreePrint {
 		System.out.println("----------------------------");
 	}
 
+
+	private static final int LOWEST_LEVEL_GAP = 2;
+	private static final int NODE_WIDTH = 2;
+
+	public static void print(BST bst) {
+		Node root = bst.getRoot();
+		int height = bst.getHeight();
+		if (root == null) {
+			return;
+		}
+
+		List<List<Node>> levels = new ArrayList<List<Node>>();
+		preorder(root, levels, 0);
+
+		// lowest level width
+		int n = ((int)Math.pow(2, height - 1) * 2 - 2) * (LOWEST_LEVEL_GAP + 2);
+		for (int i = 0; i < levels.size(); i++) {
+
+			int step = n / (int)Math.pow(2, i + 1) - 1;
+
+			System.out.printf("%2d:%2d", i, step);
+
+			List<Node> level = levels.get(i);
+			for (int j = 0; j < level.size(); j++) {
+				Node node = level.get(j);
+				if (j == 0) {
+					int horizontalIndex = node.getHorizontalIndex();
+					int spaceNumber = step + horizontalIndex * 2 * step + 2 * horizontalIndex;
+					printSpace(spaceNumber);
+				} else {
+					Node pre = level.get(j - 1);
+					int diff = node.getHorizontalIndex() - pre.getHorizontalIndex();
+					int spaceNumber = step * 2 * diff + 2 * (diff - 1);
+					printSpace(spaceNumber);
+				}
+				System.out.printf("%2d", node.getKey());
+			}
+			System.out.println();
+		}
+
+	}
+
+	private static void printSpace(int step, int n) {
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < step; j++) {
+				System.out.print(".");
+			}
+		}
+	}
+
+	private static void printSpace(int n) {
+		for (int i = 0; i < n; i++) {
+			System.out.print(".");
+		}
+	}
+
+
+
+	private static void preorder(Node node, List<List<Node>> levels, int level) {
+		if (node == null) {
+			return;
+		}
+
+		List<Node> list = null;
+		if (level >= levels.size()) {
+			list = new ArrayList<Node>();
+			levels.add(list);
+		} else {
+			list = levels.get(level);
+		}
+
+		list.add(node);
+
+		if (level == 0) {
+			node.setHorizontalIndex(0);
+		} else {
+			int indexp = node.getParent().getHorizontalIndex();
+			int base = 2 * (indexp + 1);
+			if (node == node.getParent().getLeftChild()) {
+				node.setHorizontalIndex(base - 2);
+			} else {
+				node.setHorizontalIndex(base - 1);
+			}
+		}
+
+		preorder(node.getLeftChild(), levels, level + 1);
+		preorder(node.getRightChild(), levels, level + 1);
+	}
+
 	public static void main(String[] args) {
 		int[] input = new int[11];
 		Utils.readInputFromFile("pa2input.txt", input);
@@ -98,12 +188,13 @@ public class TreePrint {
 		}
 
 		int[] numbers = Utils.createNumbers(lower, upper, n);
-//		numbers = new int[] {14, 5, 3, 12, 9, 18, 6, 10, 15, 11};
+		numbers = new int[] {14, 5, 3, 12, 9, 18, 6, 10, 15, 11};
 //		numbers = new int[] {11, 0, 15, 7, 2, 9};
 		AVLTree avlTree = new AVLTree();
 		Node root = avlTree.generateAVLTree(numbers);
 		root.display();
 		printBST(avlTree, n, numbers);
+		print(avlTree);
 
 //		for (int key : avlDeletes) {
 //			if (key > upper || key < lower) {
@@ -114,7 +205,7 @@ public class TreePrint {
 //			avlTree.getRoot().display();
 //		}
 //
-		SplayTree splayTree = new SplayTree(numbers);
+//		SplayTree splayTree = new SplayTree(numbers);
 //		for (int key : splayDeletes) {
 //			if (key > upper || key < lower) {
 //				Utils.print("key: " + key + " out of range, continue");

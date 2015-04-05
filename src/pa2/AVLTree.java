@@ -84,18 +84,6 @@ public class AVLTree extends BST {
         return null;
     }
 
-    private int getHeight(Node root) {
-
-        if (root == null) {
-            return 0;
-        }
-
-        int l = getHeight(root.getLeftChild());
-
-        int r = getHeight(root.getRightChild());
-
-        return r > l ? r + 1 : l + 1;
-    }
 
     /**
      *

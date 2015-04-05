@@ -12,8 +12,22 @@ public class BST {
 	}
 
 	public int getHeight() {
-		return height;
+		return getHeight(getRoot());
 	}
+
+	protected int getHeight(Node root) {
+
+		if (root == null) {
+			return 0;
+		}
+
+		int l = getHeight(root.getLeftChild());
+
+		int r = getHeight(root.getRightChild());
+
+		return 1 + Math.max(l, r);
+	}
+
 	public Node getRoot() {
 		return root;
 	}
@@ -73,10 +87,8 @@ public class BST {
 
 		if (y.getKey() < key) {
 			y.setRightChild(node);
-			height++;
 		} else if (y.getKey() > key){
 			y.setLeftChild(node);
-			height++;
 		} else {
 			return null;
 		}
