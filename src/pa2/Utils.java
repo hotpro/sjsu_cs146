@@ -2,7 +2,6 @@ package pa2;
 
 import java.io.*;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -39,6 +38,29 @@ public class Utils {
         return numbers;
     }
 
+    public static void println(Object o) {
+        println(o.toString());
+    }
+    public static void println(String s) {
+        println(System.out, s);
+        PrintStream printStream = null;
+        try {
+            printStream = new PrintStream(new FileOutputStream("pa2output.txt", true));
+            println(printStream, s);
+            printStream.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (printStream != null) {
+                printStream.close();
+            }
+        }
+    }
+
+    public static void println(PrintStream printStream, String s) {
+        printStream.println(s);
+    }
+
     public static void print(Object o) {
         print(o.toString());
     }
@@ -59,7 +81,7 @@ public class Utils {
     }
 
     public static void print(PrintStream printStream, String s) {
-        printStream.println(s);
+        printStream.print(s);
     }
 
     public static void readInputFromFile(String fileName, int[] input) {

@@ -3,7 +3,6 @@ package pa2;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 public class TreePrint {
 
@@ -97,10 +96,10 @@ public class TreePrint {
 		preorder(root, levels, 0);
 
 		// lowest level width
-		int n = ((int)Math.pow(2, height - 1) * 2 - 2) * (LOWEST_LEVEL_GAP + 2);
+		int n = ((int)Math.pow(2, height - 1) * (NODE_WIDTH + LOWEST_LEVEL_GAP)) - LOWEST_LEVEL_GAP;
 		for (int i = 0; i < levels.size(); i++) {
 
-			int step = n / (int)Math.pow(2, i + 1) - 1;
+			int step = (n - NODE_WIDTH * ((int)Math.pow(2, i + 1) - 1)) / (int)Math.pow(2, i+ 1);
 
 			System.out.printf("%2d:%2d", i, step);
 
@@ -188,31 +187,29 @@ public class TreePrint {
 		}
 
 		int[] numbers = Utils.createNumbers(lower, upper, n);
-		numbers = new int[] {14, 5, 3, 12, 9, 18, 6, 10, 15, 11};
-//		numbers = new int[] {11, 0, 15, 7, 2, 9};
 		AVLTree avlTree = new AVLTree();
 		Node root = avlTree.generateAVLTree(numbers);
 		root.display();
 		printBST(avlTree, n, numbers);
 		print(avlTree);
 
-//		for (int key : avlDeletes) {
-//			if (key > upper || key < lower) {
-//				Utils.print("key: " + key + " out of range, continue");
-//				continue;
-//			}
-//			avlTree.delete(key);
-//			avlTree.getRoot().display();
-//		}
-//
-//		SplayTree splayTree = new SplayTree(numbers);
-//		for (int key : splayDeletes) {
-//			if (key > upper || key < lower) {
-//				Utils.print("key: " + key + " out of range, continue");
-//				continue;
-//			}
-//			splayTree.delete(key);
-//			splayTree.getRoot().display();
-//		}
+		for (int key : avlDeletes) {
+			if (key > upper || key < lower) {
+				Utils.println("key: " + key + " out of range, continue");
+				continue;
+			}
+			avlTree.delete(key);
+			avlTree.getRoot().display();
+		}
+
+		SplayTree splayTree = new SplayTree(numbers);
+		for (int key : splayDeletes) {
+			if (key > upper || key < lower) {
+				Utils.println("key: " + key + " out of range, continue");
+				continue;
+			}
+			splayTree.delete(key);
+			splayTree.getRoot().display();
+		}
 	}
 }
