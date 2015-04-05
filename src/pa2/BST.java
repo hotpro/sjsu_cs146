@@ -1,6 +1,7 @@
 package pa2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BST {
 
@@ -29,6 +30,24 @@ public class BST {
 	}
 
 	public Node getRoot() {
+		return root;
+	}
+
+	public Node generateBSTTree(int[] numbers) {
+		if (numbers == null || numbers.length == 0) {
+			return null;
+		}
+
+		Utils.println("input numbers: " + Arrays.toString(numbers));
+
+		root = new Node(numbers[0]);
+
+		for (int i = 1; i < numbers.length; i++) {
+			Node inserted = insert(root, numbers[i]);
+			Utils.println("insert: " + numbers[i]);
+			root.display();
+		}
+
 		return root;
 	}
 

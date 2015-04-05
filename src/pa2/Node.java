@@ -1,5 +1,6 @@
 package pa2;
 
+import javax.rmi.CORBA.Util;
 import java.util.Arrays;
 
 public class Node {
@@ -107,10 +108,10 @@ public class Node {
         if (goOn) printTree(root.getRightChild(), level + 1, true, indentRight);
 
         if (level != 0) {
-            System.out.print(indent);
-            System.out.println((isRight ? " /" : " \\") + "------" + str);
+            Utils.print(indent);
+            Utils.println((isRight ? " /" : " \\") + "------" + str);
         } else
-            System.out.println(str);
+            Utils.println(str);
 
         String indentLeft = indent + (isRight ? "|       " : "        ");
         if (level <= 0) indentLeft = "";

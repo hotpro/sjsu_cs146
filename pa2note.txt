@@ -1,3 +1,7 @@
 Team members:
 Yutao Hou
 Shruti Kangokar
+
+PA2 application entry: TreePrint.main();
+
+We print BST tree in two ways, one is TreePrint.printBST(), the other is Node.display(), as shown in p2output.txt
