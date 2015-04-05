@@ -99,7 +99,7 @@ public class TreePrint {
 
 		int[] numbers = Utils.createNumbers(lower, upper, n);
 //		numbers = new int[] {14, 5, 3, 12, 9, 18, 6, 10, 15, 11};
-		numbers = new int[] {11, 0, 15, 7, 2, 9};
+//		numbers = new int[] {11, 0, 15, 7, 2, 9};
 		AVLTree avlTree = new AVLTree();
 		Node root = avlTree.generateAVLTree(numbers);
 		root.display();
