@@ -79,9 +79,6 @@ public class TreePrint {
 
 		System.out.println();
 		System.out.println("----------------------------");
-
-		root.display();
-
 	}
 
 	public static void main(String[] args) {
@@ -102,28 +99,29 @@ public class TreePrint {
 
 		int[] numbers = Utils.createNumbers(lower, upper, n);
 //		numbers = new int[] {14, 5, 3, 12, 9, 18, 6, 10, 15, 11};
+		numbers = new int[] {11, 0, 15, 7, 2, 9};
 		AVLTree avlTree = new AVLTree();
 		Node root = avlTree.generateAVLTree(numbers);
 		root.display();
 		printBST(avlTree, n, numbers);
 
-		for (int key : avlDeletes) {
-			if (key > upper || key < lower) {
-				Utils.print("key: " + key + " out of range, continue");
-				continue;
-			}
-			avlTree.delete(key);
-			avlTree.getRoot().display();
-		}
-
+//		for (int key : avlDeletes) {
+//			if (key > upper || key < lower) {
+//				Utils.print("key: " + key + " out of range, continue");
+//				continue;
+//			}
+//			avlTree.delete(key);
+//			avlTree.getRoot().display();
+//		}
+//
 		SplayTree splayTree = new SplayTree(numbers);
-		for (int key : splayDeletes) {
-			if (key > upper || key < lower) {
-				Utils.print("key: " + key + " out of range, continue");
-				continue;
-			}
-			splayTree.delete(key);
-			splayTree.getRoot().display();
-		}
+//		for (int key : splayDeletes) {
+//			if (key > upper || key < lower) {
+//				Utils.print("key: " + key + " out of range, continue");
+//				continue;
+//			}
+//			splayTree.delete(key);
+//			splayTree.getRoot().display();
+//		}
 	}
 }

@@ -35,3 +35,91 @@ splay tree delete: 11
 splay tree delete: 12
 splay tree delete: 13
 Splay{x=14, y=12, z=null, type=L_ROTATION}
+input numbers: [6, 4, 19, 14, 13, 15]
+insert: 4
+insert: 19
+insert: 14
+insert: 13
+R rotation: nodes 13, 14, 19
+insert: 15
+L rotation: nodes 19, 14, 6
+delete: 4
+delete: 5
+delete: 6
+key: 21 out of range, continue
+[6, 4, 19, 14, 13, 15]
+insert: 4
+Splay{x=4, y=6, z=null, type=R_ROTATION}
+insert: 19
+Splay{x=19, y=6, z=4, type=L_ZIG_ZIG}
+insert: 14
+Splay{x=14, y=6, z=19, type=L_ZIG_ZAG}
+insert: 13
+Splay{x=13, y=6, z=14, type=L_ZIG_ZAG}
+insert: 15
+Splay{x=15, y=19, z=14, type=R_ZIG_ZAG}
+Splay{x=15, y=13, z=null, type=L_ROTATION}
+splay tree delete: 10
+Splay{x=6, y=13, z=15, type=R_ZIG_ZIG}
+splay tree delete: 11
+Splay{x=13, y=6, z=null, type=L_ROTATION}
+splay tree delete: 12
+Splay{x=6, y=13, z=null, type=R_ROTATION}
+splay tree delete: 13
+input numbers: [9, 13, 11, 12, 5, 4]
+insert: 13
+insert: 11
+RL rotation: nodes 11, 13, 9
+insert: 12
+insert: 5
+insert: 4
+R rotation: nodes 4, 5, 9
+input numbers: [14, 17, 6, 10, 9, 19]
+insert: 17
+insert: 6
+insert: 10
+insert: 9
+RL rotation: nodes 9, 10, 6
+insert: 19
+input numbers: [2, 11, 3, 9, 17, 19, 5, 12, 8, 13]
+insert: 11
+insert: 3
+RL rotation: nodes 3, 11, 2
+insert: 9
+insert: 17
+insert: 19
+L rotation: nodes 17, 11, 3
+insert: 5
+insert: 12
+insert: 8
+LR rotation: nodes 8, 5, 9
+insert: 13
+input numbers: [11, 0, 15, 7, 2, 9]
+insert: 0
+insert: 15
+insert: 7
+insert: 2
+RL rotation: nodes 2, 7, 0
+insert: 9
+LR rotation: nodes 7, 2, 11
+input numbers: [11, 0, 15, 7, 2, 9]
+insert: 0
+insert: 15
+insert: 7
+insert: 2
+RL rotation: nodes 2, 7, 0
+insert: 9
+LR rotation: nodes 7, 2, 11
+[11, 0, 15, 7, 2, 9]
+insert: 0
+Splay{x=0, y=11, z=null, type=R_ROTATION}
+insert: 15
+Splay{x=15, y=11, z=0, type=L_ZIG_ZIG}
+insert: 7
+Splay{x=7, y=0, z=11, type=L_ZIG_ZAG}
+Splay{x=7, y=15, z=null, type=R_ROTATION}
+insert: 2
+Splay{x=2, y=0, z=7, type=L_ZIG_ZAG}
+insert: 9
+Splay{x=9, y=11, z=15, type=R_ZIG_ZIG}
+Splay{x=9, y=7, z=2, type=L_ZIG_ZIG}

@@ -200,7 +200,7 @@ public class AVLTree extends BST {
         x.setLeftChild(y);
         y.setParent(x);
 
-        if (x.getRightChild() != null) {
+        if (y.getRightChild() != null) {
             z.setLeftChild(y.getRightChild());
             y.getRightChild().setParent(z);
         } else {
