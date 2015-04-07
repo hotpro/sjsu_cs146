@@ -233,4 +233,16 @@ public class TreePrint {
 
 	}
 
+	public void printTree(Node root, boolean isRight, String indent) {
+		if (root == null) {
+			System.out.println("null");
+			return;
+		}
+
+		if (root.getRightChild() != null) {
+
+		}
+
+	}
+
 }
