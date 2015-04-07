@@ -228,4 +228,9 @@ public class TreePrint {
 		}
 		Utils.println("=======================SPLAY END=============================");
 	}
+
+	public void printTree(Node root) {
+
+	}
+
 }
