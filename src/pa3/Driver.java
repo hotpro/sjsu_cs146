@@ -1,10 +1,14 @@
 package pa3;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +22,7 @@ import java.util.Set;
  */
 public class Driver {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 
 		// START CODE build Char map
 		// Make a map from alphabets to numbers.
@@ -149,55 +153,71 @@ public class Driver {
 		}
 		String inputFileLine = null;
 		try {
-			while ((word = rd3.readLine()) != null) {
-				word = word.toUpperCase();
-				System.out.println("CurrentWord: " + word);
-				char[] nameArray = word.toCharArray();
-				int[] numArray = new int[nameArray.length];
-				for (int i = 0; i < nameArray.length; i++) {
-					numArray[i] = hash.get(nameArray[i]);
-				}
-				Arrays.sort(numArray);
-				String numStr = "";
-				for (int i = 0; i < numArray.length; i++) {
-					numStr = numStr + numArray[i];
-				}
-				// System.out.println("  " + numStr);
-				BigInteger numVal = new BigInteger(numStr);
-
-				if (dictionaryMap.containsKey(numVal)) {
-					// Check if the word exists in the ArrayList
-					ArrayList<String> data = dictionaryMap.get(numVal);
-					Iterator<String> it = data.iterator();
-					int match = 0;
-					while (it.hasNext()) {
-						if (it.next().equals(word)) {
-							System.out.println("Correct Spelling");
-							match = 1;
-							break;
+			String fileName = "Output.txt";
+			try {
+				// Assume default encoding.
+				FileWriter fileWriter = new FileWriter(fileName);
+				
+				// Always wrap FileWriter in BufferedWriter.
+				BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+				while ((word = rd3.readLine()) != null) {
+					word = word.toUpperCase();
+					bufferedWriter.write("CurrentWord: " + word);
+					 bufferedWriter.newLine();
+					char[] nameArray = word.toCharArray();
+					int[] numArray = new int[nameArray.length];
+					for (int i = 0; i < nameArray.length; i++) {
+						numArray[i] = hash.get(nameArray[i]);
+					}
+					Arrays.sort(numArray);
+					String numStr = "";
+					for (int i = 0; i < numArray.length; i++) {
+						numStr = numStr + numArray[i];
+					}
+					// System.out.println("  " + numStr);
+					BigInteger numVal = new BigInteger(numStr);
+				
+					if (dictionaryMap.containsKey(numVal)) {
+						// Check if the word exists in the ArrayList
+						ArrayList<String> data = dictionaryMap.get(numVal);
+						Iterator<String> it = data.iterator();
+						int match = 0;
+						while (it.hasNext()) {
+							if (it.next().equals(word)) {
+								bufferedWriter.write("Correct Spelling");
+								 bufferedWriter.newLine();
+								match = 1;
+								break;
+							}
 						}
-					}
 
-					if (match == 0) {
-						System.out.println("Incorrect Spelling");
-					}
+						if (match == 0) {
+							bufferedWriter.write("Incorrect Spelling");
+							 bufferedWriter.newLine();
+						}
 
-					// Print Anagrams
-					Iterator<String> it2 = data.iterator();
-					System.out.print("Anagram: ");
-					while (it2.hasNext()) {
-						System.out.print(it2.next() + " ");
+						// Print Anagrams
+						Iterator<String> it2 = data.iterator();
+						bufferedWriter.write("Anagram: ");
+						while (it2.hasNext()) {
+							bufferedWriter.write(it2.next() + " ");
+						}
+						 bufferedWriter.newLine();
+					} else {
+						// Key doesn't exist
+						bufferedWriter.write("Incorrect Spelling");
+						 bufferedWriter.newLine();
+						bufferedWriter.write("No Anagrams");
+						 bufferedWriter.newLine();
 					}
-					System.out.println();
-				} else {
-					// Key doesn't exist
-					System.out.println("Incorrect Spelling.");
-					System.out.println("No Anagrams");
 				}
+				// Always close files.
+				bufferedWriter.close();
+			} catch (IOException ex) {
+				System.out.println("Error writing to file '" + fileName + "'");
+				// Or we could just do this:
+				// ex.printStackTrace();
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("IO Exception: " + word);
 		} catch (NullPointerException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Null Pointer Exception: " + word);
