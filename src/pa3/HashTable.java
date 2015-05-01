@@ -19,6 +19,9 @@ public class HashTable {
         String convertedStr = convert(s);
         int h = hash(convertedStr.hashCode());
         int index = h % table.length;
+        if (index < 0) {
+            index += table.length;
+        }
         Entry entry = table[index];
         table[index] = new Entry(s, entry);
         count++;
@@ -38,7 +41,7 @@ public class HashTable {
         Entry entry = table[index];
         while (entry != null) {
             String c = convert(entry.getValue());
-            if (entry.getValue().equals(s)) {
+            if (entry.getValue().equalsIgnoreCase(s)) {
                 result.setIsCorrect(true);
             }
 

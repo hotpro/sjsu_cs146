@@ -1,30 +1,76 @@
-CurrentWord: ART
-Correct Spelling
-Anagram: ART RAT TAR 
-CurrentWord: ABBREVIAET
-Incorrect Spelling
-Anagram: ABBREVIATE 
-CurrentWord: CONCERN
-Correct Spelling
-Anagram: CONCERN 
-CurrentWord: 6TH
-Correct Spelling
-Anagram: 6TH 
-CurrentWord: 7TH
-Correct Spelling
-Anagram: 7TH 
-CurrentWord: 8TH
-Correct Spelling
-Anagram: 8TH 
-CurrentWord: 9TH
-Correct Spelling
-Anagram: 9TH 
-CurrentWord: GRILLWORK
-Correct Spelling
-Anagram: GRILLWORK 
-CurrentWord: PROVOCATION
-Correct Spelling
-Anagram: PROVOCATION 
-CurrentWord: TETS
-Incorrect Spelling
-Anagram: TEST 
+Art
+"Correct spelling"
+Valid anagrams:
+tar
+art
+rat
+
+abbreviaet
+"Incorrect spelling"
+Valid anagrams:
+abbreviate
+
+concern
+"Correct spelling"
+Valid anagrams:
+concern
+
+6th
+"Correct spelling"
+Valid anagrams:
+10th
+4th
+5th
+6th
+7th
+8th
+9th
+
+7th
+"Correct spelling"
+Valid anagrams:
+10th
+4th
+5th
+6th
+7th
+8th
+9th
+
+8th
+"Correct spelling"
+Valid anagrams:
+10th
+4th
+5th
+6th
+7th
+8th
+9th
+
+9th
+"Correct spelling"
+Valid anagrams:
+10th
+4th
+5th
+6th
+7th
+8th
+9th
+
+grillwork
+"Correct spelling"
+Valid anagrams:
+grillwork
+
+provocation
+"Correct spelling"
+Valid anagrams:
+provocation
+
+tets
+"Incorrect spelling"
+Valid anagrams:
+test
+
