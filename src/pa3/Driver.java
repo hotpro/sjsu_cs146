@@ -26,7 +26,7 @@ public class Driver {
 
 		// START CODE build Char map
 		// Make a map from alphabets to numbers.
-		final String filename = "Charmap.txt";
+		final String filename = "pa3Charmap.txt";
 		BufferedReader rd = null;
 		HashMap<Character, Integer> hash = new HashMap<>();
 		int key = 1;
@@ -144,7 +144,7 @@ public class Driver {
 		}
 
 		BufferedReader rd3 = null;
-		final String inputFile = "InputFile.txt";
+		final String inputFile = "pa3InputFile.txt";
 		try {
 			rd3 = new BufferedReader(new FileReader(new File(inputFile)));
 		} catch (FileNotFoundException e) {
@@ -153,7 +153,7 @@ public class Driver {
 		}
 		String inputFileLine = null;
 		try {
-			String fileName = "Output.txt";
+			String fileName = "pa3Output.txt";
 			try {
 				// Assume default encoding.
 				FileWriter fileWriter = new FileWriter(fileName);
