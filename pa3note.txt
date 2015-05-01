@@ -9,3 +9,4 @@ Approach:
 2. create a hash table with a prime number of elements. Use next prime to make a hash function.
 3. h(int hashCode) = key % next_prime.
 4. Prime.p is a sequence of prime numbers.
+5. Small-dictionary100 is for debug.
