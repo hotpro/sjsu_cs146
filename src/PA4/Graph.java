@@ -1,4 +1,4 @@
-package PA4;
+package pa4;
 
 import java.util.ArrayList;
 import java.util.HashMap;
