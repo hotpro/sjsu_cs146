@@ -43,7 +43,6 @@ public class KruskalMST {
         edgeList = generateEdgeList(graph);
         double tree[][] = new double[rlength][clength];
         /**
-         * 初始化tree
          */
         for (int i = 0; i < rlength; i++) {
             for (int j = 0; j < clength; j++) {
