@@ -15,7 +15,7 @@ import java.util.PriorityQueue;
 public class Graph {
 
 	static HashSet<Vertex> graphVertices;
-	static HashSet<Edge> graphEdges;
+	static HashSet<Edge2> graphEdges;
 	static PriorityQueue<Vertex> vertexPriQueue;
 	
 	private static final String fileName = "edgeData.txt";
@@ -63,7 +63,7 @@ public class Graph {
 	public static void getVerticesAndEdges() {
 
 		graphVertices = new HashSet<Vertex>();
-		graphEdges = new HashSet<Edge>();
+		graphEdges = new HashSet<Edge2>();
 		
 		BufferedReader fRead = null;
 		try {
@@ -87,7 +87,7 @@ public class Graph {
 				} else {
 					getVertex(y).setWeight(wt);
 				}
-				Edge e = new Edge(x, y, wt);
+				Edge2 e = new Edge2(x, y, wt);
 				graphEdges.add(e);
 			}
 		} catch (IOException e) {
@@ -117,11 +117,11 @@ public class Graph {
 	}
 
 	// Returns the edge reference if it exists in the graph else null
-	public static Edge getEdge (Edge e) {
+	public static Edge2 getEdge (Edge2 e) {
 		
-		Iterator<Edge> itr = graphEdges.iterator();
+		Iterator<Edge2> itr = graphEdges.iterator();
 		while(itr.hasNext()) {
-			Edge d = itr.next();
+			Edge2 d = itr.next();
 			if ((d.u.name.equals(e.u.name) && d.v.name.equals(e.v.name)) || (d.u.name.equals(e.v.name) && d.v.name.equals(e.u.name))) {  
 				return d;
 			}
