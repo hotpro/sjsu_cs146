@@ -13,11 +13,13 @@ public class KruskalMST {
      */
     public static void main(String[] args) {
 
-        double graph[][] = {{0, 1, 4, 4, 5},
+        double graph[][] = {
+                {0, 1, 4, 4, 5},
                 {1, 0, 3, 7, 5},
-                {4, 3, 0, 6, Double.MAX_VALUE},
+                {4, 3, 0, 6, 0},
                 {4, 7, 6, 0, 2},
-                {5, 5, Double.MAX_VALUE, 2, 0}};
+                {5, 5, 0, 2, 0}
+        };
         double tree[][] = minimumSpanningTree(graph);
         if (tree == null) {
             System.out.println("no spanning tree");
@@ -37,67 +39,48 @@ public class KruskalMST {
      */
     public static double[][] minimumSpanningTree(double[][] graph) {
 
-        int rlength = graph.length;
-        int clength = graph[0].length;
+        int number = graph.length;
         PriorityQueue<Edge> edgeList;
         edgeList = generateEdgeList(graph);
-        double tree[][] = new double[rlength][clength];
+        double tree[][] = new double[number][number];
         /**
-         * 初始化tree
          */
-        for (int i = 0; i < rlength; i++) {
-            for (int j = 0; j < clength; j++) {
-                if (i == j)
-                    tree[i][j] = 0;
-                else
-                    tree[i][j] = Double.MAX_VALUE;
+        for (int i = 0; i < number; i++) {
+            for (int j = 0; j < number; j++) {
+                tree[i][j] = 0;
             }
         }
 
-        /**
-         */
-        Map<Integer, Set<Integer>> map = new HashMap<Integer, Set<Integer>>();
+        // use disjoint set to check a cycle
+        Map<Integer, Integer> map = new HashMap<>();
+
+        // initialize set
+        for (int i = 0; i < number; i++) {
+            map.put(i, i);
+        }
+
         int edgeCount = 0;
-        while (edgeCount < rlength - 1 && !edgeList.isEmpty()) {
+        while (edgeCount < number - 1 && !edgeList.isEmpty()) {
             Edge e = edgeList.poll();
 
+            int repU = map.get(e.u);
+            int repV = map.get(e.v);
 
-            Set<Integer> setU = map.get(e.u);
-            Set<Integer> setV = map.get(e.v);
-            //System.out.println(e);
-            if (setU == null && setV == null) {
-                Set<Integer> set = new HashSet<Integer>();
-                set.add(e.u);
-                set.add(e.v);
-                map.put(e.u, set);
-                map.put(e.v, set);
-            }
-            else if (setU == null && setV != null) {
-                map.put(e.u, setV);
-                setV.add(e.u);
-            } else if (setU != null && setV == null) {
-                map.put(e.v, setU);
-                setU.add(e.v);
-            }
-            else if (setU != setV) {
-                for (int v : setV) {
-                    map.put(v, setU);
-
-                }
-
-                setU.addAll(setV);
-            }
-            else {
+            if (repU != repV) {
+                // make u as the representation
+                map.put(e.v, repU);
+            } else {
+                // a cycle!!!
                 continue;
             }
+
             tree[e.u][e.v] = e.weight;
             tree[e.v][e.u] = e.weight;
             edgeCount++;
 
         }
 
-
-        if (edgeCount == rlength - 1)
+        if (edgeCount == number - 1)
             return tree;
         else
             return null;
@@ -109,12 +92,11 @@ public class KruskalMST {
      * @return
      */
     private static PriorityQueue<Edge> generateEdgeList(double[][] graph) {
+        int number = graph.length;
         PriorityQueue<Edge> edgeList = new PriorityQueue<Edge>();
-        int rlength = graph.length;
-        int clength = graph[0].length;
-        for (int i = 0; i < rlength; i++) {
-            for (int j = i + 1; j < clength; j++) {
-                if (graph[i][j] > 0 & graph[i][j] < Double.MAX_VALUE) {
+        for (int i = 0; i < number; i++) {
+            for (int j = i + 1; j < number; j++) {
+                if (graph[i][j] > 0) {
                     Edge e = new Edge(i, j, graph[i][j]);
                     edgeList.add(e);
                 }
