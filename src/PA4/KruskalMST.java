@@ -1,5 +1,10 @@
 package pa4;
 
+import org.omg.PortableInterceptor.INACTIVE;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,14 +18,15 @@ public class KruskalMST {
      */
     public static void main(String[] args) {
 
-        double graph[][] = {
-                {0, 1, 4, 4, 5},
-                {1, 0, 3, 7, 5},
-                {4, 3, 0, 6, 0},
-                {4, 7, 6, 0, 2},
-                {5, 5, 0, 2, 0}
-        };
-        double tree[][] = minimumSpanningTree(graph);
+//        int graph[][] = {
+//                {0, 1, 4, 4, 5},
+//                {1, 0, 3, 7, 5},
+//                {4, 3, 0, 6, 0},
+//                {4, 7, 6, 0, 2},
+//                {5, 5, 0, 2, 0}
+//        };
+        int graph[][] = buildAdjMatrixFromFile();
+        int tree[][] = minimumSpanningTree(graph);
         if (tree == null) {
             System.out.println("no spanning tree");
             System.exit(0);
@@ -37,12 +43,12 @@ public class KruskalMST {
      * @param graph
      * @return
      */
-    public static double[][] minimumSpanningTree(double[][] graph) {
+    public static int [][] minimumSpanningTree(int[][] graph) {
 
         int number = graph.length;
         PriorityQueue<Edge> edgeList;
         edgeList = generateEdgeList(graph);
-        double tree[][] = new double[number][number];
+        int tree[][] = new int[number][number];
         /**
          */
         for (int i = 0; i < number; i++) {
@@ -63,8 +69,8 @@ public class KruskalMST {
         while (edgeCount < number - 1 && !edgeList.isEmpty()) {
             Edge e = edgeList.poll();
 
-            int repU = map.get(e.u);
-            int repV = map.get(e.v);
+            int repU = find(map, e.u);
+            int repV = find(map, e.v);
 
             if (repU != repV) {
                 // make u as the representation
@@ -86,12 +92,23 @@ public class KruskalMST {
             return null;
     }
 
+    private static int find(Map<Integer, Integer> map, int x) {
+        int rep = map.get(x);
+
+        while (rep != x) {
+            x = rep;
+            rep = map.get(x);
+        }
+
+        return rep;
+    }
+
     /**
      *
      * @param graph
      * @return
      */
-    private static PriorityQueue<Edge> generateEdgeList(double[][] graph) {
+    private static PriorityQueue<Edge> generateEdgeList(int[][] graph) {
         int number = graph.length;
         PriorityQueue<Edge> edgeList = new PriorityQueue<Edge>();
         for (int i = 0; i < number; i++) {
@@ -106,35 +123,47 @@ public class KruskalMST {
     }
 
 
+    public static int[][] buildAdjMatrixFromFile() {
+
+        int[][] adjMatrix = null;
+
+        BufferedReader fRead = null;
+        try {
+            fRead = new BufferedReader(new FileReader("edgeData.txt"));
+            String line;
+            line = fRead.readLine();
+            if (line != null) {
+                int numVertices = Integer.valueOf(line);
+                adjMatrix = new int[numVertices][numVertices];
+                // Initialize all to 0;
+                for (int i = 0; i < numVertices; i++) {
+                    for (int j = 0; j < numVertices; j++) {
+                        adjMatrix[i][j] = 0;
+                    }
+                }
+
+                while ((line = fRead.readLine()) != null) {
+                    String[] splitLine = line.split(" ");
+                    String weight = splitLine[1];
+                    String edge = splitLine[0];
+                    String[] vertices = edge.split(",");
+                    int u = Integer.parseInt(vertices[0]) - 1;
+                    int v = Integer.parseInt(vertices[1]) - 1;
+                    adjMatrix[u][v] = Integer.parseInt(weight);
+                    adjMatrix[v][u] = Integer.parseInt(weight);
+                }
+
+                for (int i = 0; i < numVertices; i++) {
+                    for (int j = 0; j < numVertices; j++) {
+                        System.out.print(adjMatrix[i][j] + " ");
+                    }
+                    System.out.println("");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return adjMatrix;
+    }
 }
 
-class Edge implements Comparable<Edge> {
-    int u;
-    int v;
-    double weight;
-
-
-    public Edge(int u, int v, double weight) {
-        super();
-        this.u = u;
-        this.v = v;
-        this.weight = weight;
-    }
-
-
-    @Override
-    public int compareTo(Edge e) {
-        if (e.weight == weight)
-            return 0;
-        else if (weight < e.weight)
-            return -1;
-        else
-            return 1;
-
-    }
-
-    public String toString() {
-        return u + "--" + v + ":" + weight;
-    }
-
-}
