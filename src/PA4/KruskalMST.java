@@ -11,13 +11,6 @@ public class KruskalMST {
 
     public static void main(String[] args) {
 
-//        int graph[][] = {
-//                {0, 1, 4, 4, 5},
-//                {1, 0, 3, 7, 5},
-//                {4, 3, 0, 6, 0},
-//                {4, 7, 6, 0, 2},
-//                {5, 5, 0, 2, 0}
-//        };
         int graph[][] = buildAdjMatrixFromFile();
         int tree[][] = minimumSpanningTree(graph);
         if (tree == null) {
@@ -117,7 +110,7 @@ public class KruskalMST {
 
         BufferedReader fRead = null;
         try {
-            fRead = new BufferedReader(new FileReader("edgeData2.txt"));
+            fRead = new BufferedReader(new FileReader("pa4input.txt"));
             String line;
             line = fRead.readLine();
             if (line != null) {

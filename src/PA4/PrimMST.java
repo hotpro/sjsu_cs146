@@ -63,7 +63,7 @@ public class PrimMST {
 
         BufferedReader fRead = null;
         try {
-            fRead = new BufferedReader(new FileReader("edgeData2.txt"));
+            fRead = new BufferedReader(new FileReader("pa4input.txt"));
             String line;
             line = fRead.readLine();
             if (line != null) {
