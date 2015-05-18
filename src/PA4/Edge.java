@@ -29,7 +29,7 @@ class Edge implements Comparable<Edge> {
     }
 
     public String toString() {
-        return (u + 1) + "--" + (v + 1) + ":" + weight;
+        return (u + 1) + "-->" + (v + 1) + ":" + weight;
     }
 
 }

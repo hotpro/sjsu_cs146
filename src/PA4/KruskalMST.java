@@ -1,21 +1,14 @@
 package pa4;
 
-import org.omg.PortableInterceptor.INACTIVE;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.Set;
 
 public class KruskalMST {
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
 
 //        int graph[][] = {
@@ -38,12 +31,7 @@ public class KruskalMST {
 
     }
 
-    /**
-     *
-     * @param graph
-     * @return
-     */
-    public static int [][] minimumSpanningTree(int[][] graph) {
+    public static int[][] minimumSpanningTree(int[][] graph) {
 
         int number = graph.length;
         PriorityQueue<Edge> edgeList;
@@ -129,7 +117,7 @@ public class KruskalMST {
 
         BufferedReader fRead = null;
         try {
-            fRead = new BufferedReader(new FileReader("edgeData.txt"));
+            fRead = new BufferedReader(new FileReader("edgeData2.txt"));
             String line;
             line = fRead.readLine();
             if (line != null) {
